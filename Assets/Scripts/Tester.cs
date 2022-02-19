@@ -19,20 +19,20 @@ public class Tester : MonoBehaviour
             // Debug.Log($"mouse clicked at {cellPos}");
             var tile = map.GetTile(cellPos);
 
-            if (tile != clickToSet)
-            {
-                map.SetTile(cellPos, clickToSet);
-            }
-            else
-            {
-                //Debug.Log($"Try walk at {cellPos}");
-                //int counter = 0;
-                //TilemapWalker8.WalkNow(map, cellPos, clickToSet, (tilemap, i) =>
-                //{
-                //    Debug.Log($"<color=#88a0ff>[{counter}]</color>Visit at {i}");
-                //    counter++;
-                //});
-            }
+            //if (tile != clickToSet)
+            //{
+            //    map.SetTile(cellPos, clickToSet);
+            //}
+            //else
+            //{
+            //    //Debug.Log($"Try walk at {cellPos}");
+            //    //int counter = 0;
+            //    //TilemapWalker8.WalkNow(map, cellPos, clickToSet, (tilemap, i) =>
+            //    //{
+            //    //    Debug.Log($"<color=#88a0ff>[{counter}]</color>Visit at {i}");
+            //    //    counter++;
+            //    //});
+            //}
 
         }
         if (Input.GetKeyDown(KeyCode.T))

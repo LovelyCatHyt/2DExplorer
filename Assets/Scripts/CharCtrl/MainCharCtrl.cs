@@ -19,10 +19,11 @@ namespace CharCtrl
 
         private void FixedUpdate()
         {
-            var input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            if (input.x != 0 || input.y != 0)
+            var input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * speed;
+            var tempSpeed = input.magnitude;
+            if (tempSpeed > speed)
             {
-                input *= speed / input.magnitude;
+                input *= speed / tempSpeed;
             }
 
             _rigid.velocity = input;
