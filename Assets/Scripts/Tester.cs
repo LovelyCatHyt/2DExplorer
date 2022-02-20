@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TileDataIO;
 using Tiles;
 using TileTool;
 using UnityEngine;
@@ -8,36 +9,19 @@ using UnityEngine.Tilemaps;
 
 public class Tester : MonoBehaviour
 {
+    public GameObject grid;
     public Tilemap map;
-    public TileBase clickToSet;
+    public TileDataMgr dataMgr;
 
-    private void Update()
+    [ContextMenu("Test Save")]
+    public void TestSave()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            var cellPos = map.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            // Debug.Log($"mouse clicked at {cellPos}");
-            var tile = map.GetTile(cellPos);
+        dataMgr.SaveWholeGrid(grid);
+    }
 
-            //if (tile != clickToSet)
-            //{
-            //    map.SetTile(cellPos, clickToSet);
-            //}
-            //else
-            //{
-            //    //Debug.Log($"Try walk at {cellPos}");
-            //    //int counter = 0;
-            //    //TilemapWalker8.WalkNow(map, cellPos, clickToSet, (tilemap, i) =>
-            //    //{
-            //    //    Debug.Log($"<color=#88a0ff>[{counter}]</color>Visit at {i}");
-            //    //    counter++;
-            //    //});
-            //}
-
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            map.RefreshAllTiles();
-        }
+    [ContextMenu("Test Load")]
+    public void TestLoad()
+    {
+        dataMgr.LoadWholeGrid(grid);
     }
 }
