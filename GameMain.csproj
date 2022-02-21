@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{07B8F2D0-0816-2FE7-0C27-54A724CFAFAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -56,6 +57,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\TileDataIO\TileDataMgr.cs" />
     <Compile Include="Assets\Scripts\Tiles\DebugTile.cs" />
     <Compile Include="Assets\Scripts\TileDataIO\TileDataArrayDict.cs" />
     <Compile Include="Assets\Scripts\TileTool\TilemapWalker8.cs" />
@@ -66,7 +68,6 @@
     <Compile Include="Assets\Scripts\TileTool\ITilemapWalker.cs" />
     <Compile Include="Assets\Scripts\Tester.cs" />
     <Compile Include="Assets\Scripts\CharCtrl\MainCharCtrl.cs" />
-    <Compile Include="Assets\Scripts\TileDataIO\TileDataMgr.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\GameMain.asmdef" />
@@ -303,11 +304,11 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.NRefactory">
       <HintPath>Library\PackageCache\com.unity.render-pipelines.core@10.4.0\Editor\ShaderGenerator\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\jillejr.newtonsoft.json-for-unity@13.0.102\Plugins\Newtonsoft.Json Editor\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:\Program Files\Unity\2020.3.6f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

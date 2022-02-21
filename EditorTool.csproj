@@ -10,10 +10,10 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{6658B109-4BE4-73DA-FFDC-8484200E7AD6}</ProjectGuid>
+    <ProjectGuid>{751369F2-87AF-4738-DF38-55A19FCD55F9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Unitilities</AssemblyName>
+    <AssemblyName>EditorTool</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -49,7 +49,7 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.14</UnityProjectGeneratorVersion>
-    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2020.3.6f1c1</UnityVersion>
   </PropertyGroup>
@@ -57,19 +57,11 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Unitilities\Effect\MaterialChange.cs" />
-    <Compile Include="Assets\Scripts\Unitilities\Effect\ColorChange.cs" />
-    <Compile Include="Assets\Scripts\Unitilities\GameObjectPool.cs" />
-    <Compile Include="Assets\Scripts\Unitilities\MathTool.cs" />
-    <Compile Include="Assets\Scripts\Unitilities\TransformEX.cs" />
-    <Compile Include="Assets\Scripts\Unitilities\Camera\SimpleCam2D.cs" />
-    <Compile Include="Assets\Scripts\Unitilities\Effect\IEffect.cs" />
-    <Compile Include="Assets\Scripts\Unitilities\Effect\ShowUp.cs" />
-    <Compile Include="Assets\Scripts\Unitilities\Bounds2D.cs" />
-    <Compile Include="Assets\Scripts\Unitilities\OperationChain.cs" />
+    <Compile Include="Assets\Scripts\EditorTool\CameraMenu.cs" />
+    <Compile Include="Assets\Scripts\EditorTool\TilemapMenu.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Scripts\Unitilities\Unitilities.asmdef" />
+    <None Include="Assets\Scripts\EditorTool\EditorTool.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -308,6 +300,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\jillejr.newtonsoft.json-for-unity@13.0.102\Plugins\Newtonsoft.Json Editor\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:\Program Files\Unity\2020.3.6f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>
@@ -660,8 +655,22 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="GameMain.csproj">
+      <Project>{07B8F2D0-0816-2FE7-0C27-54A724CFAFAD}</Project>
+      <Name>GameMain</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unitilities.csproj">
+      <Project>{6658B109-4BE4-73DA-FFDC-8484200E7AD6}</Project>
+      <Name>Unitilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
