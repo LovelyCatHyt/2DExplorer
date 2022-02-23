@@ -16,13 +16,11 @@ namespace Entity
         private void OnTriggerEnter2D(Collider2D other)
         {
             var character = other.gameObject.GetComponent<MainCharacter>();
-            if (character)
+            if (!character) return;
+            if (character.currentCheckPoint.index < index)
             {
-                if (character.currentCheckPoint.index < index)
-                {
-                    character.currentCheckPoint = this;
-                    connectedChar = character;
-                }
+                character.currentCheckPoint = this;
+                connectedChar = character;
             }
 
             if (character.currentCheckPoint == this)
