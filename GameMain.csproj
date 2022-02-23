@@ -8,8 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{07B8F2D0-0816-2FE7-0C27-54A724CFAFAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -68,6 +67,9 @@
     <Compile Include="Assets\Scripts\TileTool\ITilemapWalker.cs" />
     <Compile Include="Assets\Scripts\Tester.cs" />
     <Compile Include="Assets\Scripts\CharCtrl\MainCharCtrl.cs" />
+    <Compile Include="Assets\Scripts\Tiles\ObjectTile.cs" />
+    <Compile Include="Assets\Scripts\Entity\Turret.cs" />
+    <Compile Include="Assets\Scripts\Entity\Bullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\GameMain.asmdef" />
