@@ -13,6 +13,10 @@ namespace Entity
         /// 子弹速度
         /// </summary>
         public float speed = 1;
+        /// <summary>
+        /// 子弹的伤害
+        /// </summary>
+        public double damage = 10;
         public Vector3 direction;
         /// <summary>
         /// 撞击事件
@@ -37,9 +41,11 @@ namespace Entity
         private void OnCollisionEnter2D(Collision2D other)
         {
             onHit?.Invoke();
-            if (other.collider.GetComponent<MainCharCtrl>())
+            var role = other.collider.GetComponent<IRole>();
+            if (role != null)
             {
                 onValidHit?.Invoke(other.collider.gameObject);
+                role.Damaged(damage);
             }
             onHit = null;
             onValidHit = null;

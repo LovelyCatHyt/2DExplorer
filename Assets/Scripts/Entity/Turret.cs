@@ -35,11 +35,11 @@ namespace Entity
         /// </summary>
         private float _fireTimer;
         private Vector3Int _position;
-        private MainCharCtrl _mainChar;
+        private MainCharacter _mainChar;
         /// <summary>
         /// 射线检测缓存
         /// </summary>
-        private RaycastHit2D[] _raycastHitCache = new RaycastHit2D[2];
+        private readonly RaycastHit2D[] _raycastHitCache = new RaycastHit2D[2];
 
         /// <summary>
         /// 启动时记录相应的坐标和子弹对象池
@@ -51,7 +51,7 @@ namespace Entity
             gameObject.name = $"Turret {position}";
             _position = position;
             bulletPool = tilemap.GetComponent<GameObjectPool>();
-            _mainChar = FindObjectOfType<MainCharCtrl>();
+            _mainChar = FindObjectOfType<MainCharacter>();
             _fireTimer = Mathf.PerlinNoise(position.x, position.y) * fireInterval;
         }
 
@@ -67,7 +67,7 @@ namespace Entity
                 {
                     // 第一个必定是本身, 即所在的 Tilemap 或者对应的 Sprite. 所以读取第二个是否为玩家
                     // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-                    if (_raycastHitCache[1].collider.GetComponent<MainCharCtrl>() == _mainChar)
+                    if (_raycastHitCache[1].collider.GetComponent<MainCharacter>() == _mainChar)
                     {
                         Fire(target);
                     }
