@@ -29,7 +29,12 @@ namespace Entity
         /// 发射距离
         /// </summary>
         public float fireStartDistance = 1.5f;
-        
+
+        /// <summary>
+        /// 炮塔核心
+        /// </summary>
+        [SerializeField] private Transform turretCore;
+        private Quaternion _coreStartQuaternion;
         /// <summary>
         /// 射击计时器
         /// </summary>
@@ -55,9 +60,15 @@ namespace Entity
             _fireTimer = Mathf.PerlinNoise(position.x, position.y) * fireInterval;
         }
 
+        private void Awake()
+        {
+            _coreStartQuaternion = turretCore.rotation;
+        }
+
         private void FixedUpdate()
         {
             _fireTimer += Time.fixedDeltaTime;
+            UpdateCoreDirection(_mainChar.transform.position - transform.position);
             if (_fireTimer >= fireInterval)
             {
                 var target = _mainChar.transform.Position2D();
@@ -77,13 +88,19 @@ namespace Entity
             }
         }
 
+        private void UpdateCoreDirection(Vector3 dir)
+        {
+            var look = Quaternion.LookRotation(Vector3.forward, dir);
+            turretCore.rotation = look * _coreStartQuaternion;
+        }
+
         /// <summary>
         /// 射击
         /// </summary>
         /// <param name="target"></param>
         public void Fire(Vector3 target)
         {
-            // Debug.Log($"{gameObject.name} try to fire.");
+            Debug.Log($"{gameObject.name} try to fire.");
 
             if (!bulletPool.Pop(out var bulletGO))
             {

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 211d8ff22aba72744881f2a4c06b799e, type: 3}
   m_Name: Turret
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: e8d277d80cac3a0408d6f0b3e3041bc3, type: 3}
-  m_Color: {r: 0.92300004, g: 0.55371326, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b6f8a12ca2fe8454d8a5760ddcb2037b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 0.8
     e01: 0

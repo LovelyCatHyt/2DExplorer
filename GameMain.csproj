@@ -61,18 +61,18 @@
     <Compile Include="Assets\Scripts\Tiles\DebugTile.cs" />
     <Compile Include="Assets\Scripts\TileDataIO\TileDataArrayDict.cs" />
     <Compile Include="Assets\Scripts\TileTool\TilemapWalker8.cs" />
+    <Compile Include="Assets\Scripts\Entity\CheckPoint.cs" />
     <Compile Include="Assets\Scripts\Entity\Turret.cs" />
     <Compile Include="Assets\Scripts\TileDataIO\AbstractTileDataFormat.cs" />
     <Compile Include="Assets\Scripts\TileDataIO\ITileDataFormat.cs" />
     <Compile Include="Assets\Scripts\Entity\Bullet.cs" />
     <Compile Include="Assets\Scripts\TileDataIO\CoreTileData.cs" />
+    <Compile Include="Assets\Scripts\Entity\IRole.cs" />
     <Compile Include="Assets\Scripts\TileTool\TilemapWalker4.cs" />
+    <Compile Include="Assets\Scripts\Entity\MainCharacter.cs" />
     <Compile Include="Assets\Scripts\TileTool\ITilemapWalker.cs" />
     <Compile Include="Assets\Scripts\Tester.cs" />
     <Compile Include="Assets\Scripts\CharCtrl\MainCharCtrl.cs" />
-    <Compile Include="Assets\Scripts\Entity\IRole.cs" />
-    <Compile Include="Assets\Scripts\Entity\MainCharacter.cs" />
-    <Compile Include="Assets\Scripts\Entity\CheckPoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\GameMain.asmdef" />
