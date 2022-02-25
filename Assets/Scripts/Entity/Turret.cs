@@ -100,7 +100,7 @@ namespace Entity
         /// <param name="target"></param>
         public void Fire(Vector3 target)
         {
-            Debug.Log($"{gameObject.name} try to fire.");
+            // Debug.Log($"{gameObject.name} try to fire.");
 
             if (!bulletPool.Pop(out var bulletGO))
             {
