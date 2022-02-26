@@ -1,6 +1,8 @@
 using System;
 using CharCtrl;
+using Unitilities;
 using UnityEngine;
+using Zenject;
 
 namespace Entity
 {
@@ -26,12 +28,21 @@ namespace Entity
         /// 有效攻击事件
         /// </summary>
         public event Action<GameObject> onValidHit;
-        public GameObject explodeEffect;
+        
+        [Inject(Id = "Explosion Pool")]
+        private GameObjectPool _explosionPool;
+        [Inject(Id = "Bullet Pool")]
+        private GameObjectPool _bulletPool;
+        /// <summary>
+        /// 发射这个子弹的炮塔的碰撞体
+        /// </summary>
+        private Collider2D _turretCollider;
 
-        public virtual void Init(Vector3 position, Vector3 target)
+        public virtual void Init(Vector3 position, Vector3 target, Collider2D fromTurret)
         {
             transform.position = position;
             direction = (target - position).normalized;
+            _turretCollider = fromTurret;
         }
         
         private void FixedUpdate()
@@ -41,16 +52,19 @@ namespace Entity
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            if (other.collider == _turretCollider) return;
             onHit?.Invoke();
             var role = other.collider.GetComponent<IRole>();
             if (role != null)
             {
                 onValidHit?.Invoke(other.collider.gameObject);
                 role.Damaged(damage);
-                Instantiate(explodeEffect, transform.position, Quaternion.identity);
+                Debug.Assert(_explosionPool.Pop(out var effect));
+                effect.transform.SetPosition2D(transform.position);
             }
             onHit = null;
             onValidHit = null;
+            _bulletPool.Push(gameObject);
         }
     }
 }

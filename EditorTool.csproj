@@ -306,6 +306,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\jillejr.newtonsoft.json-for-unity@13.0.102\Plugins\Newtonsoft.Json Editor\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Zenject-usage">
+      <HintPath>Assets\Plugins\Zenject\Source\Usage\Zenject-usage.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
     </Reference>

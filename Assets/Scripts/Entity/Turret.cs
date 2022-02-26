@@ -1,10 +1,10 @@
 using System;
-using System.Linq;
-using CharCtrl;
+using DI;
 using Tiles;
 using Unitilities;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Zenject;
 
 namespace Entity
 {
@@ -13,10 +13,7 @@ namespace Entity
     /// </summary>
     public class Turret : MonoBehaviour, ITileGOComponent
     {
-        /// <summary>
-        /// 子弹对象池
-        /// </summary>
-        public GameObjectPool bulletPool;
+
         /// <summary>
         /// 开火间隔
         /// </summary>
@@ -31,9 +28,18 @@ namespace Entity
         public float fireStartDistance = 1.5f;
 
         /// <summary>
+        /// 子弹对象池
+        /// </summary>
+        [Inject(Id = "Bullet Pool")]
+        private GameObjectPool _bulletPool;
+        [Inject]
+        private DiContainer _container;
+        /// <summary>
         /// 炮塔核心
         /// </summary>
-        [SerializeField] private Transform turretCore;
+        [SerializeField] 
+        private Transform turretCore;
+        private Collider2D _collider;
         private Quaternion _coreStartQuaternion;
         /// <summary>
         /// 射击计时器
@@ -55,7 +61,7 @@ namespace Entity
         {
             gameObject.name = $"Turret {position}";
             _position = position;
-            bulletPool = tilemap.GetComponent<GameObjectPool>();
+            // _bulletPool = tilemap.GetComponent<GameObjectPool>();
             _mainChar = FindObjectOfType<MainCharacter>();
             _fireTimer = Mathf.PerlinNoise(position.x, position.y) * fireInterval;
         }
@@ -63,6 +69,14 @@ namespace Entity
         private void Awake()
         {
             _coreStartQuaternion = turretCore.rotation;
+            _collider = GetComponentInChildren<Collider2D>();
+        }
+
+        private void Start()
+        {
+            // 注入一下
+            // 不在 Awake 注入的原因是, Tilemap 使用 Instantiate 时, 尽管 Awake 会被调用, 但本物体的上级物体是空的(null).
+            GetComponentInParent<ContainerEntry>().Container.Inject(this);
         }
 
         private void FixedUpdate()
@@ -102,15 +116,14 @@ namespace Entity
         {
             // Debug.Log($"{gameObject.name} try to fire.");
 
-            if (!bulletPool.Pop(out var bulletGO))
+            if (!_bulletPool.Pop(out var bulletGO))
             {
-                Debug.LogError($"{bulletPool.name} can't pop bullet out. check the pool settings.");
+                Debug.LogError($"{_bulletPool.name} can't pop bullet out. check the pool settings.");
                 return;
             }
 
             var bullet = bulletGO.GetComponent<Bullet>();
-            bullet.onHit += () => bulletPool.Push(bullet.gameObject);
-            bullet.Init(transform.position + (target - transform.position).normalized * fireStartDistance, target);
+            bullet.Init(transform.position + (target - transform.position).normalized * fireStartDistance, target, _collider);
         }
     }
 }

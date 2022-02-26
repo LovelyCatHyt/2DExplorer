@@ -74,8 +74,8 @@
     <Compile Include="Assets\Scripts\Tester.cs" />
     <Compile Include="Assets\Scripts\CharCtrl\MainCharCtrl.cs" />
     <Compile Include="Assets\Scripts\Effect\Explosion.cs" />
-    <Compile Include="Assets\Scripts\TestInstaller.cs" />
-    <Compile Include="Assets\Scripts\TesterB.cs" />
+    <Compile Include="Assets\Scripts\DI\GameInstaller.cs" />
+    <Compile Include="Assets\Scripts\DI\ContainerEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\GameMain.asmdef" />

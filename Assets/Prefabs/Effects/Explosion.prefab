@@ -98,7 +98,7 @@ MonoBehaviour:
   startColor: {r: 21.361254, g: 6.5284405, b: 0, a: 1}
   endColor: {r: 0.0625, g: 0.021568628, b: 0, a: 0}
   duration: 0.25
-  autoDestroy: 1
+  autoDestroy: 0
   onFinish:
     m_PersistentCalls:
       m_Calls: []

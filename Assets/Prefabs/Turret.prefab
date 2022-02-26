@@ -143,8 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32ae342fc7dc1e4b9cd767af31b6f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPool: {fileID: 0}
   fireInterval: 1
   detectRange: 10
-  fireStartDistance: 0.5
+  fireStartDistance: 0
   turretCore: {fileID: 8869600850504932028}
