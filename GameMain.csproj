@@ -74,6 +74,8 @@
     <Compile Include="Assets\Scripts\Tester.cs" />
     <Compile Include="Assets\Scripts\CharCtrl\MainCharCtrl.cs" />
     <Compile Include="Assets\Scripts\Effect\Explosion.cs" />
+    <Compile Include="Assets\Scripts\TestInstaller.cs" />
+    <Compile Include="Assets\Scripts\TesterB.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\GameMain.asmdef" />
@@ -321,6 +323,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\jillejr.newtonsoft.json-for-unity@13.0.102\Plugins\Newtonsoft.Json Editor\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Zenject-usage">
+      <HintPath>Assets\Plugins\Zenject\Source\Usage\Zenject-usage.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:\Program Files\Unity\2020.3.6f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>
@@ -678,6 +683,10 @@
     <ProjectReference Include="Unitilities.csproj">
       <Project>{6658B109-4BE4-73DA-FFDC-8484200E7AD6}</Project>
       <Name>Unitilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject.csproj">
+      <Project>{8BABE137-2BCC-BEB9-80D9-D000269E90FB}</Project>
+      <Name>Zenject</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
