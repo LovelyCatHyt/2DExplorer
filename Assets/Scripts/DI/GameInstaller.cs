@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entity;
 using Unitilities;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,6 +20,7 @@ namespace DI
         {
             Container.Bind<GameObjectPool>().WithId("Bullet Pool").FromInstance(bulletPool);
             Container.Bind<GameObjectPool>().WithId("Explosion Pool").FromInstance(explosionPool);
+            Container.Bind<MainCharacter>().FromInstance(FindObjectOfType<MainCharacter>());
             // 处理 GameObjectPool 的实例化操作, 使其实现自动注入
             bulletPool.onPrefabInstantiate.AddListener(Inject);
             explosionPool.onPrefabInstantiate.AddListener(Inject);

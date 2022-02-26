@@ -46,6 +46,7 @@ namespace Entity
         /// </summary>
         private float _fireTimer;
         private Vector3Int _position;
+        [Inject]
         private MainCharacter _mainChar;
         /// <summary>
         /// 射线检测缓存
@@ -62,7 +63,7 @@ namespace Entity
             gameObject.name = $"Turret {position}";
             _position = position;
             // _bulletPool = tilemap.GetComponent<GameObjectPool>();
-            _mainChar = FindObjectOfType<MainCharacter>();
+            // _mainChar = FindObjectOfType<MainCharacter>();
             _fireTimer = Mathf.PerlinNoise(position.x, position.y) * fireInterval;
         }
 
