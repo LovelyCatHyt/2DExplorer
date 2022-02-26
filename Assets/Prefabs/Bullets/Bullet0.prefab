@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -495097202174733913}
   - component: {fileID: 5644427902999371768}
   m_Layer: 6
-  m_Name: Bullet
+  m_Name: Bullet0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
+  damage: 10
   direction: {x: 0, y: 0, z: 0}
+  explodeEffect: {fileID: 2272081462630143304, guid: 1954f5c281c74f449a9859cce44a6e5b, type: 3}
 --- !u!58 &-495097202174733913
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -26,13 +26,14 @@ namespace Entity
         /// 有效攻击事件
         /// </summary>
         public event Action<GameObject> onValidHit;
+        public GameObject explodeEffect;
 
         public virtual void Init(Vector3 position, Vector3 target)
         {
             transform.position = position;
             direction = (target - position).normalized;
         }
-
+        
         private void FixedUpdate()
         {
             transform.position += direction * (speed * Time.fixedDeltaTime);
@@ -46,6 +47,7 @@ namespace Entity
             {
                 onValidHit?.Invoke(other.collider.gameObject);
                 role.Damaged(damage);
+                Instantiate(explodeEffect, transform.position, Quaternion.identity);
             }
             onHit = null;
             onValidHit = null;

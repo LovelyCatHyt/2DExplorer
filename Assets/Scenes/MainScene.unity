@@ -6274,7 +6274,7 @@ MonoBehaviour:
   prefabSelectMode: 0
   prefabs:
   - {fileID: 9194702128079015963, guid: c387b0e5e194f824ea5f390d1f556dd2, type: 3}
-  - {fileID: 9194702128079015963, guid: 48ffb319b7d316147828ec3a9e80c835, type: 3}
+  - {fileID: 3153232356108139225, guid: 765312f33ed4b3146878a432e9cf8426, type: 3}
   poolCapacities: 
   initObject: 10
 --- !u!1001 &753790689
