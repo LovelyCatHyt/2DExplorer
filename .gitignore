@@ -58,3 +58,6 @@ sysinfo.txt
 *.apk
 *.unitypackage
 Builds/
+*.csproj
+
+UserSettings/
