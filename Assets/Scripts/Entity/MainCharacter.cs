@@ -1,5 +1,7 @@
+using Audio;
 using Unitilities;
 using UnityEngine;
+using Zenject;
 
 namespace Entity
 {
@@ -18,6 +20,9 @@ namespace Entity
         /// 当前检查点
         /// </summary>
         public CheckPoint currentCheckPoint;
+        public AudioClip deadAudio;
+
+        [Inject] private AudioManager _audioManager;
 
         private void Awake()
         {
@@ -41,8 +46,10 @@ namespace Entity
 
         public void Dead()
         {
+            _audioManager.PlaySound(_audioManager.GetTrackIDFromName("BackGround"), deadAudio);
             transform.SetPosition2D(currentCheckPoint.transform.position);
             Init();
+
         }
     }
 

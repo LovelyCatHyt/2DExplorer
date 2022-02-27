@@ -149,4 +149,5 @@ MonoBehaviour:
   effectRenderer: {fileID: 5729247095190719415}
   fireEffectDuration: 0.1
   fireColor: {r: 1.319508, g: 1.319508, b: 1.319508, a: 1}
+  fireSound: {fileID: 8300000, guid: 6b0100eca9c83ce4593843b3e0383349, type: 3}
   turretCore: {fileID: 8869600850504932028}

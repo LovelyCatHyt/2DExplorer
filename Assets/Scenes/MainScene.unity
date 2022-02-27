@@ -6599,13 +6599,6 @@ MonoBehaviour:
   grid: {fileID: 2098086347}
   map: {fileID: 2135741041}
   dataMgr: {fileID: 2098086350}
-  testList:
-  - key: '""'
-    value: 5
-  - key: 23322333
-    value: 0
-  - key: '""'
-    value: 5
   clip: {fileID: 8300000, guid: 570fd18417ddec5408fb41fdbeac5cc7, type: 3}
 --- !u!4 &1218542484
 Transform:

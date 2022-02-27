@@ -148,5 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fa0955c7c37d740852f21e78a710c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initHealth: 100
   health: 100
   startCheckPoint: {fileID: 0}
+  currentCheckPoint: {fileID: 0}
+  deadAudio: {fileID: 8300000, guid: cf7329e4206e1d345b08164bb0171401, type: 3}

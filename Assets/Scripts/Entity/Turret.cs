@@ -1,4 +1,5 @@
 using System;
+using Audio;
 using DG.Tweening;
 using DI;
 using Tiles;
@@ -30,6 +31,7 @@ namespace Entity
         public Renderer effectRenderer;
         public float fireEffectDuration;
         [ColorUsage(true, true)] public Color fireColor;
+        public AudioClip fireSound;
 
         /// <summary>
         /// 子弹对象池
@@ -37,7 +39,7 @@ namespace Entity
         [Inject(Id = "Bullet Pool")]
         private GameObjectPool _bulletPool;
         [Inject]
-        private DiContainer _container;
+        private AudioManager _audioManager;
         /// <summary>
         /// 炮塔核心
         /// </summary>
@@ -57,6 +59,10 @@ namespace Entity
         /// </summary>
         private readonly RaycastHit2D[] _raycastHitCache = new RaycastHit2D[2];
         private Material _material;
+        /// <summary>
+        /// 用于随机初始相位的柏林噪声的尺度比例
+        /// </summary>
+        private const float NoiseScale = .1f;
 
         /// <summary>
         /// 启动时记录相应的坐标和子弹对象池
@@ -67,7 +73,7 @@ namespace Entity
         {
             gameObject.name = $"Turret {position}";
             _position = position;
-            _fireTimer = Mathf.PerlinNoise(position.x, position.y) * fireInterval;
+            _fireTimer = Mathf.PerlinNoise(position.x * NoiseScale, position.y * NoiseScale) * fireInterval;
         }
 
         private void Awake()
@@ -128,9 +134,11 @@ namespace Entity
             }
 
             var bullet = bulletGO.GetComponent<Bullet>();
-            bullet.Init(transform.position + (target - transform.position).normalized * fireStartDistance, target, _collider);
+            var position = transform.position;
+            bullet.Init(position + (target - position).normalized * fireStartDistance, target, _collider);
             _material.DOKill(true);
             _material.DOColor(fireColor, fireEffectDuration * 0.5f).SetLoops(2, LoopType.Yoyo);
+            _audioManager.PlaySound(_audioManager.GetTrackIDFromName("Sound"), fireSound, position);
         }
     }
 }
