@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using Entity;
 using Unitilities;
 using UnityEngine;
@@ -15,12 +16,14 @@ namespace DI
     {
         public GameObjectPool bulletPool;
         public GameObjectPool explosionPool;
+        public AudioManagerComponent audioManager;
 
         public override void InstallBindings()
         {
             Container.Bind<GameObjectPool>().WithId("Bullet Pool").FromInstance(bulletPool);
             Container.Bind<GameObjectPool>().WithId("Explosion Pool").FromInstance(explosionPool);
             Container.Bind<MainCharacter>().FromInstance(FindObjectOfType<MainCharacter>());
+            Container.Bind<AudioManager>().FromInstance(audioManager.audioManager);
             // 处理 GameObjectPool 的实例化操作, 使其实现自动注入
             bulletPool.onPrefabInstantiate.AddListener(Inject);
             explosionPool.onPrefabInstantiate.AddListener(Inject);
