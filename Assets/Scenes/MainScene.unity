@@ -232,7 +232,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 5
-      m_TileSpriteIndex: 5
+      m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -772,7 +772,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -792,7 +792,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -1332,7 +1332,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 1
+      m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -1672,7 +1672,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 5
-      m_TileSpriteIndex: 5
+      m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -2212,7 +2212,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -2232,7 +2232,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -2772,7 +2772,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 1
+      m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -6177,16 +6177,16 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 578
     m_Data: {fileID: 21300000, guid: e8d277d80cac3a0408d6f0b3e3041bc3, type: 3}
-  - m_RefCount: 2
-    m_Data: {fileID: -8900632797018122485, guid: e14435596fe60ad439a133fd91dfc041, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 6
     m_Data: {fileID: 21300000, guid: b6f8a12ca2fe8454d8a5760ddcb2037b, type: 3}
-  - m_RefCount: 2
-    m_Data: {fileID: 4429380745168012402, guid: e14435596fe60ad439a133fd91dfc041, type: 3}
-  - m_RefCount: 2
-    m_Data: {fileID: 6076168756079295722, guid: e14435596fe60ad439a133fd91dfc041, type: 3}
-  - m_RefCount: 2
-    m_Data: {fileID: 5757297203639459536, guid: e14435596fe60ad439a133fd91dfc041, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 594
     m_Data:
@@ -6276,6 +6276,15 @@ MonoBehaviour:
   - {fileID: 9194702128079015963, guid: c387b0e5e194f824ea5f390d1f556dd2, type: 3}
   - {fileID: 3153232356108139225, guid: 765312f33ed4b3146878a432e9cf8426, type: 3}
   poolCapacities: 
+  onPrefabInstantiate:
+    m_PersistentCalls:
+      m_Calls: []
+  onPop:
+    m_PersistentCalls:
+      m_Calls: []
+  onPush:
+    m_PersistentCalls:
+      m_Calls: []
   initObject: 10
 --- !u!1001 &753790689
 PrefabInstance:
@@ -6330,10 +6339,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4721117349237197084, guid: 86e2d6be9b4fd564ba8a4eeb7cd80f91, type: 3}
       propertyPath: index
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4721117349237197085, guid: 86e2d6be9b4fd564ba8a4eeb7cd80f91, type: 3}
-      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4721117349237197087, guid: 86e2d6be9b4fd564ba8a4eeb7cd80f91, type: 3}
@@ -6402,10 +6407,6 @@ PrefabInstance:
     - target: {fileID: 4721117349237197082, guid: 86e2d6be9b4fd564ba8a4eeb7cd80f91, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4721117349237197085, guid: 86e2d6be9b4fd564ba8a4eeb7cd80f91, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4721117349237197087, guid: 86e2d6be9b4fd564ba8a4eeb7cd80f91, type: 3}
       propertyPath: m_Name
@@ -6799,6 +6800,15 @@ MonoBehaviour:
   prefabs:
   - {fileID: 2272081462630143304, guid: 1954f5c281c74f449a9859cce44a6e5b, type: 3}
   poolCapacities: 
+  onPrefabInstantiate:
+    m_PersistentCalls:
+      m_Calls: []
+  onPop:
+    m_PersistentCalls:
+      m_Calls: []
+  onPush:
+    m_PersistentCalls:
+      m_Calls: []
   initObject: 10
 --- !u!1 &1652745579
 GameObject:

@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using DI;
 using Tiles;
 using Unitilities;
@@ -26,6 +27,9 @@ namespace Entity
         /// 发射距离
         /// </summary>
         public float fireStartDistance = 1.5f;
+        public Renderer effectRenderer;
+        public float fireEffectDuration;
+        [ColorUsage(true, true)] public Color fireColor;
 
         /// <summary>
         /// 子弹对象池
@@ -52,6 +56,7 @@ namespace Entity
         /// 射线检测缓存
         /// </summary>
         private readonly RaycastHit2D[] _raycastHitCache = new RaycastHit2D[2];
+        private Material _material;
 
         /// <summary>
         /// 启动时记录相应的坐标和子弹对象池
@@ -62,8 +67,6 @@ namespace Entity
         {
             gameObject.name = $"Turret {position}";
             _position = position;
-            // _bulletPool = tilemap.GetComponent<GameObjectPool>();
-            // _mainChar = FindObjectOfType<MainCharacter>();
             _fireTimer = Mathf.PerlinNoise(position.x, position.y) * fireInterval;
         }
 
@@ -71,6 +74,7 @@ namespace Entity
         {
             _coreStartQuaternion = turretCore.rotation;
             _collider = GetComponentInChildren<Collider2D>();
+            _material = effectRenderer.material;
         }
 
         private void Start()
@@ -125,6 +129,8 @@ namespace Entity
 
             var bullet = bulletGO.GetComponent<Bullet>();
             bullet.Init(transform.position + (target - transform.position).normalized * fireStartDistance, target, _collider);
+            _material.DOKill(true);
+            _material.DOColor(fireColor, fireEffectDuration * 0.5f).SetLoops(2, LoopType.Yoyo);
         }
     }
 }
