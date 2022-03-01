@@ -33,11 +33,18 @@ public class Tester : MonoBehaviour
         //    _tilemapManager.SetCell(pos, cellTemplate);
         //}
 
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    var pos = map.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        //    _tilemapManager.SetCell(pos, emptyGround);
-        //}
+        if (Input.GetMouseButtonDown(1))
+        {
+            var pos = map.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            _tilemapManager.SetCell(pos, emptyGround);
+        }
+    }
+
+    [ContextMenu("Test")]
+    public void Test()
+    {
+        //int[] aNullArray = null;
+        //Debug.Log($"aNullArray.Any() = {aNullArray.Any()}");
     }
 
     [ContextMenu("Test Play Sound")]

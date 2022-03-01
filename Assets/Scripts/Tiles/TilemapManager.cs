@@ -52,11 +52,21 @@ namespace Tiles
         /// <param name="cell"></param>
         private void SetCellInternal(Vector3Int position, GridCell cell)
         {
+            TileBase[] toSetTiles = new TileBase[_maps.Length];
+            if (cell.tiles != null && cell.tiles.Any())
+            {
+                for (var i = 0; i < toSetTiles.Length && i < cell.tiles.Length; i++)
+                {
+                    toSetTiles[i] = cell.tiles[i];
+                }
+            }
+
             for (var i = 0; i < _maps.Length; i++)
             {
-                _maps[i].SetTile(position, cell.tiles[i]);
+                _maps[i].SetTile(position, toSetTiles[i]);
             }
-            _goMap[position] = cell.gameObjects.ToList();
+            
+            _goMap[position] = cell.gameObjects?.ToList()?? new List<GameObject>();
         }
 
         /// <summary>
