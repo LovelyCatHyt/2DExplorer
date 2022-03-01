@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Audio;
 using Entity;
+using TileDataIO;
+using Tiles;
 using Unitilities;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,6 +19,8 @@ namespace DI
         public GameObjectPool bulletPool;
         public GameObjectPool explosionPool;
         public AudioManagerComponent audioManager;
+        public TilemapManager tilemapManager;
+        public TileDataMgr tileDataMgr;
 
         public override void InstallBindings()
         {
@@ -24,6 +28,8 @@ namespace DI
             Container.Bind<GameObjectPool>().WithId("Explosion Pool").FromInstance(explosionPool);
             Container.Bind<MainCharacter>().FromInstance(FindObjectOfType<MainCharacter>());
             Container.Bind<AudioManager>().FromInstance(audioManager.audioManager);
+            Container.Bind<TilemapManager>().FromInstance(tilemapManager);
+            Container.Bind<TileDataMgr>().FromInstance(tileDataMgr);
             // 处理 GameObjectPool 的实例化操作, 使其实现自动注入
             bulletPool.onPrefabInstantiate.AddListener(Inject);
             explosionPool.onPrefabInstantiate.AddListener(Inject);

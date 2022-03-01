@@ -100,7 +100,7 @@ MonoBehaviour:
   speed: 8
   damage: 10
   direction: {x: 0, y: 0, z: 0}
-  explodeEffect: {fileID: 2272081462630143304, guid: 1954f5c281c74f449a9859cce44a6e5b, type: 3}
+  hitSound: {fileID: 8300000, guid: 7c1c509175900424a883317eb47ade84, type: 3}
 --- !u!58 &-495097202174733913
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -6600,6 +6600,17 @@ MonoBehaviour:
   map: {fileID: 2135741041}
   dataMgr: {fileID: 2098086350}
   clip: {fileID: 8300000, guid: 570fd18417ddec5408fb41fdbeac5cc7, type: 3}
+  cellTemplate:
+    tiles:
+    - {fileID: 11400000, guid: 3b32912be8b579a439f31db105eae5d7, type: 2}
+    - {fileID: 0}
+    gameObjects:
+    - {fileID: 4721117349237197087, guid: 86e2d6be9b4fd564ba8a4eeb7cd80f91, type: 3}
+  emptyGround:
+    tiles:
+    - {fileID: 11400000, guid: bd76353d18941264c91587b4784f3f2e, type: 2}
+    - {fileID: 0}
+    gameObjects: []
 --- !u!4 &1218542484
 Transform:
   m_ObjectHideFlags: 0
@@ -6646,6 +6657,8 @@ MonoBehaviour:
   bulletPool: {fileID: 630527334}
   explosionPool: {fileID: 1642674924}
   audioManager: {fileID: 1832803220}
+  tilemapManager: {fileID: 2098086352}
+  tileDataMgr: {fileID: 2098086350}
 --- !u!4 &1321245200
 Transform:
   m_ObjectHideFlags: 0
@@ -6906,6 +6919,7 @@ GameObject:
   - component: {fileID: 2098086348}
   - component: {fileID: 2098086350}
   - component: {fileID: 2098086351}
+  - component: {fileID: 2098086352}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -6973,6 +6987,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f174c0767d30ffe40b3bca43c13c99b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2098086352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098086347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c266e9eedca92846847abc14ce9d6b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maps:
+  - {fileID: 630527333}
+  - {fileID: 2135741041}
 --- !u!1 &2135741038
 GameObject:
   m_ObjectHideFlags: 0

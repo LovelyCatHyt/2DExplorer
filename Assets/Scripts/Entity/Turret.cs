@@ -75,7 +75,7 @@ namespace Entity
             _position = position;
             _fireTimer = Mathf.PerlinNoise(position.x * NoiseScale, position.y * NoiseScale) * fireInterval;
         }
-
+        
         private void Awake()
         {
             _coreStartQuaternion = turretCore.rotation;

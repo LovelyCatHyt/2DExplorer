@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: damage
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5915662888751484033, guid: c387b0e5e194f824ea5f390d1f556dd2, type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b4bc8c7189cb10c409bcc34c6c12fa2e, type: 3}
     - target: {fileID: 9194702128079015961, guid: c387b0e5e194f824ea5f390d1f556dd2, type: 3}
       propertyPath: m_RootOrder
       value: 0

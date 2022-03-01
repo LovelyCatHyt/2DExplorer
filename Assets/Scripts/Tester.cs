@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Audio;
 using Newtonsoft.Json;
 using TileDataIO;
@@ -17,18 +18,28 @@ public class Tester : MonoBehaviour
     public GameObject grid;
     public Tilemap map;
     public TileDataMgr dataMgr;
-    
+
     public AudioClip clip;
+    public GridCell cellTemplate;
+    public GridCell emptyGround;
     [Inject] private AudioManager _audioManager;
+    [Inject] private TilemapManager _tilemapManager;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TestSound();
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    var pos = map.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        //    _tilemapManager.SetCell(pos, cellTemplate);
+        //}
+
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    var pos = map.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        //    _tilemapManager.SetCell(pos, emptyGround);
+        //}
     }
-    
+
     [ContextMenu("Test Play Sound")]
     public void TestSound()
     {

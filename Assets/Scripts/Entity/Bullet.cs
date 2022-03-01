@@ -1,4 +1,5 @@
 using System;
+using Audio;
 using CharCtrl;
 using Unitilities;
 using UnityEngine;
@@ -28,11 +29,14 @@ namespace Entity
         /// 有效攻击事件
         /// </summary>
         public event Action<GameObject> onValidHit;
-        
+        public AudioClip hitSound;
+
         [Inject(Id = "Explosion Pool")]
         private GameObjectPool _explosionPool;
         [Inject(Id = "Bullet Pool")]
         private GameObjectPool _bulletPool;
+        [Inject]
+        private AudioManager _audioManager;
         /// <summary>
         /// 发射这个子弹的炮塔的碰撞体
         /// </summary>
@@ -65,6 +69,7 @@ namespace Entity
             onHit = null;
             onValidHit = null;
             _bulletPool.Push(gameObject);
+            _audioManager.PlaySound(_audioManager.GetTrackIDFromName("Sound"), hitSound, transform.position);
         }
     }
 }

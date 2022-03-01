@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Tiles;
 using UnityEngine;
+using Zenject;
 
 namespace Entity
 {
@@ -18,6 +20,7 @@ namespace Entity
         [ColorUsage(true, true)] public Color activatedColor;
         [ColorUsage(true, true)] public Color disconnectColor;
 
+        [Inject] private TilemapManager _tilemapManager;
         private readonly int _emissionProp = Shader.PropertyToID("_Emission");
         private Material _material;
 
@@ -31,6 +34,12 @@ namespace Entity
         {
             _material = GetComponent<Renderer>().material;
             _material.SetColor(_emissionProp, index == 0 ? activatedColor : initColor);
+        }
+
+        private void Start()
+        {
+            // 由于在实例化的过程中就会调用 Awake, 无法保证注入成功, 因此在 Start 中才能调用需要被注入的字段
+            _tilemapManager.AddGameObject(gameObject);
         }
 
         private void DisConnect()
