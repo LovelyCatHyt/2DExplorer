@@ -10,7 +10,7 @@ using Zenject;
 namespace Tiles
 {
     /// <summary>
-    /// 瓦片地图管理器, 管理所有层的瓦片, 同时提供一些对所有层生效的接口
+    /// 瓦片地图管理器, 管理所有瓦片地图, 同时提供一些对所有层生效的接口
     /// </summary>
     public class TilemapManager : MonoBehaviour
     {
@@ -30,6 +30,30 @@ namespace Tiles
         public void AutoSetMaps()
         {
             _maps = GetComponentsInChildren<Tilemap>();
+        }
+
+        public List<Tilemap> GetAllTilemaps() => _maps.ToList();
+
+        public List<EntityData> GetAllGameObjects()
+        {
+            var list = _goMap.GetEnumerable();
+            var result = new List<EntityData>();
+            foreach (var tuple in list)
+            {
+                EntityData data = new EntityData { position = tuple.Item1 };
+
+                foreach (var go in tuple.Item2)
+                {
+                    var nextData = data;
+                    nextData.AddExtraData(go);
+                    var entity = go.GetComponent<Entity.Entity>();
+                    if (!entity) continue;
+                    nextData.prefabName = entity.PrefabName;
+                    result.Add(nextData);
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -65,8 +89,8 @@ namespace Tiles
             {
                 _maps[i].SetTile(position, toSetTiles[i]);
             }
-            
-            _goMap[position] = cell.gameObjects?.ToList()?? new List<GameObject>();
+
+            _goMap[position] = cell.gameObjects?.ToList() ?? new List<GameObject>();
         }
 
         /// <summary>
@@ -95,7 +119,7 @@ namespace Tiles
 
             foreach (var go in originCell.gameObjects)
             {
-                if(go) Destroy(go);
+                if (go) Destroy(go);
             }
 
             SetCellInternal(position, cell);
@@ -103,10 +127,11 @@ namespace Tiles
 
         /// <summary>
         /// 在指定坐标添加一个物体的关联
+        /// <para>多次关联结果相同</para>
         /// </summary>
         /// <param name="position"></param>
         /// <param name="go"></param>
-        public void AddGameObject(Vector3Int position, GameObject go)
+        public void RecordGameObject(Vector3Int position, GameObject go)
         {
             // 没必要添加一个 null 的 GO
             if (!go) return;
@@ -116,11 +141,27 @@ namespace Tiles
 
         /// <summary>
         /// 关联一个物体到它所在的坐标上
+        /// <para>多次关联结果相同</para>
         /// </summary>
         /// <param name="go"></param>
-        public void AddGameObject(GameObject go)
+        public void RecordGameObject(GameObject go)
         {
-            AddGameObject(WorldToCell(go.transform.position), go);
+            RecordGameObject(WorldToCell(go.transform.position), go);
+        }
+
+        /// <summary>
+        /// 实例化一个指定的 prefab, 然后关联到指定的坐标
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="prefab"></param>
+        public void AddGameObject(Vector3Int position, GameObject prefab, Action<GameObject> afterInstantiate = null)
+        {
+            var instance = Instantiate(prefab, GetCellCenterWorld(position), Quaternion.identity, transform);
+            instance.name = $"{prefab.name} {position}";
+            _container.InjectGameObject(instance);
+            afterInstantiate?.Invoke(instance);
+            RecordGameObject(position, instance);
+
         }
 
         /// <summary>
@@ -131,6 +172,19 @@ namespace Tiles
         public void RemoveGameObject(Vector3Int position, GameObject go) => _goMap[position].Remove(go);
 
         /// <summary>
+        /// 移除所有 GO 的关联
+        /// <param name="destroy">销毁关联的物体</param>
+        /// </summary>
+        public void RemoveAllGameObject(bool destroy = true)
+        {
+            foreach (var tuple in _goMap.GetEnumerable())
+            {
+                if (destroy) tuple.Item2.ForEach(Destroy);
+                _goMap[tuple.Item1].Clear();
+            }
+        }
+
+        /// <summary>
         /// 获取单元坐标
         /// </summary>
         /// <param name="worldPosition"></param>
@@ -139,6 +193,12 @@ namespace Tiles
         {
             return !_maps.Any() ? new Vector3Int() : _maps[0].WorldToCell(worldPosition);
         }
+
+        public Vector3 GetCellCenterWorld(Vector3Int position)
+        {
+            return _maps[0].GetCellCenterWorld(position);
+        }
+
     }
 
 }

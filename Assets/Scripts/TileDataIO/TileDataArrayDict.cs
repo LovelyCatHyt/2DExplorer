@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unitilities.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,11 +7,11 @@ namespace TileDataIO
     public class TileDataArrayDict : AbstractTileDataFormat
     {
         /// <summary>
-        /// ∫¨“Âµ»Õ¨”⁄ BoundsInt µƒ size
+        /// Âê´‰πâÁ≠âÂêå‰∫é BoundsInt ÁöÑ size
         /// </summary>
         public Vector3Int size;
         /// <summary>
-        /// ¥Ê¥¢ Tile µƒ ID
+        /// Â≠òÂÇ® Tile ÁöÑ ID
         /// </summary>
         public int[,] idArray;
         // public Dictionary<string, int[,]> extraData;
@@ -30,9 +29,9 @@ namespace TileDataIO
             Debug.Log($"Data extracted from {map.gameObject.name} at region {region}");
         }
 
-        public override void ExportToMap(Tilemap map, Vector3Int origin, Dictionary<string, TileBase> tileLUT)
+        public override void ExportToMap(Tilemap map, Vector3Int origin, ObjectRefTable tileLut)
         {
-            BuildTileList(tileLUT);
+            BuildTileList(tileLut);
             var bounds = new BoundsInt(origin, size);
             foreach (var pos in bounds.allPositionsWithin)
             {

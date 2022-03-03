@@ -6611,6 +6611,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: bd76353d18941264c91587b4784f3f2e, type: 2}
     - {fileID: 0}
     gameObjects: []
+  objectRefTable: {fileID: 11400000, guid: b9629cdf04596fe47873f5052ab04638, type: 2}
 --- !u!4 &1218542484
 Transform:
   m_ObjectHideFlags: 0
@@ -6967,14 +6968,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa1c0a5eafcfdd4cac62f48d3e51c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileAssets:
-  - {fileID: 11400000, guid: bd76353d18941264c91587b4784f3f2e, type: 2}
-  - {fileID: 11400000, guid: 76b1f90b60e5fb146b0c510274cfc81a, type: 2}
-  - {fileID: 11400000, guid: 35f2b5d235dbb8a4bb0ccd8fa1c2a7ab, type: 2}
-  - {fileID: 11400000, guid: 9bda15411f553dc4cbcdd25dc8504982, type: 2}
-  - {fileID: 0}
+  tileTable: {fileID: 11400000, guid: 89e945a1b336eec46b4fbdffc9311b09, type: 2}
+  entityTable: {fileID: 11400000, guid: b9629cdf04596fe47873f5052ab04638, type: 2}
   jsonFormat: 1
   tileDataDirectoryRelative: ../TileData/
+  entityDataPathRelative: ../TileData/Entities.json
 --- !u!114 &2098086351
 MonoBehaviour:
   m_ObjectHideFlags: 0

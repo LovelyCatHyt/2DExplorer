@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Tiles
@@ -23,5 +24,7 @@ namespace Tiles
         public void SetObject(Vector3Int position, T obj);
         
         public T this [Vector3Int pos] { get; set; }
+
+        public IEnumerable<(Vector3Int, T)> GetEnumerable();
     }
 }

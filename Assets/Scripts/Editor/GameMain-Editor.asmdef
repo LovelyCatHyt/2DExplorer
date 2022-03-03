@@ -1,9 +1,10 @@
 {
-    "name": "EditorTool",
+    "name": "GameMain-Editor",
     "rootNamespace": "",
     "references": [
         "GUID:45da63f3b53fe06448d2eff90e2d6d4d",
-        "GUID:2621de402f952b6409cde2a23d3a0aa1"
+        "GUID:2621de402f952b6409cde2a23d3a0aa1",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
     ],
     "includePlatforms": [
         "Editor"

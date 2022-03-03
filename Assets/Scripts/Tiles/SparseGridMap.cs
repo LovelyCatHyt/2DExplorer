@@ -35,5 +35,7 @@ namespace Tiles
             get => GetObject(pos);
             set => SetObject(pos, value);
         }
+
+        public IEnumerable<(Vector3Int, T)> GetEnumerable() => _objList.ToList();
     }
 }

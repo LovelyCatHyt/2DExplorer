@@ -7,11 +7,13 @@ using Newtonsoft.Json;
 using TileDataIO;
 using Tiles;
 using TileTool;
+using Unitilities.DebugUtil;
 using Unitilities.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Util.PropAttr;
+using Unitilities.PropAttr;
 using Zenject;
+using Object = UnityEngine.Object;
 
 public class Tester : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class Tester : MonoBehaviour
     public AudioClip clip;
     public GridCell cellTemplate;
     public GridCell emptyGround;
+    public ObjectRefTable objectRefTable;
     [Inject] private AudioManager _audioManager;
     [Inject] private TilemapManager _tilemapManager;
 
@@ -43,8 +46,8 @@ public class Tester : MonoBehaviour
     [ContextMenu("Test")]
     public void Test()
     {
-        //int[] aNullArray = null;
-        //Debug.Log($"aNullArray.Any() = {aNullArray.Any()}");
+        object a = (int) 1;
+        var b = (Object)a;
     }
 
     [ContextMenu("Test Play Sound")]
@@ -53,15 +56,15 @@ public class Tester : MonoBehaviour
         _audioManager.PlaySound(_audioManager.GetTrackIDFromName("BackGround"), clip);
     }
 
-    [ContextMenu("Test Save")]
-    public void TestSave()
-    {
-        dataMgr.SaveWholeGrid(grid);
-    }
+    //[ContextMenu("Test Save")]
+    //public void TestSave()
+    //{
+    //    dataMgr.SaveWholeGrid(grid);
+    //}
 
-    [ContextMenu("Test Load")]
-    public void TestLoad()
-    {
-        dataMgr.LoadWholeGrid(grid);
-    }
+    //[ContextMenu("Test Load")]
+    //public void TestLoad()
+    //{
+    //    dataMgr.LoadWholeGrid(grid);
+    //}
 }

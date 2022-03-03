@@ -1,25 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unitilities.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace TileDataIO
 {
     /// <summary>
-    /// µØÍ¼Êı¾İ½Ó¿Ú
+    /// åœ°å›¾æ•°æ®æ¥å£
     /// </summary>
     public interface ITileDataFormat
     {
         /// <summary>
-        /// µ¼³öÊı¾İµ½µØÍ¼µÄÖ¸¶¨µã
+        /// å¯¼å‡ºæ•°æ®åˆ°åœ°å›¾çš„æŒ‡å®šç‚¹
         /// </summary>
-        /// <param name="map">Òªµ¼³öµÄµØÍ¼Ä¿±ê</param>
-        /// <param name="origin">µ¼³öµÄÔ­µã</param>
-        /// <param name="tileLUT">ÍßÆ¬±í, ÓÃËüÀ´´´½¨ÍßÆ¬ÊµÀı</param>
-        public void ExportToMap(Tilemap map, Vector3Int origin, Dictionary<string, TileBase> tileLUT);
+        /// <param name="map">è¦å¯¼å‡ºçš„åœ°å›¾ç›®æ ‡</param>
+        /// <param name="origin">å¯¼å‡ºçš„åŸç‚¹</param>
+        /// <param name="tileLut">ç“¦ç‰‡è¡¨, ç”¨å®ƒæ¥åˆ›å»ºç“¦ç‰‡å®ä¾‹</param>
+        public void ExportToMap(Tilemap map, Vector3Int origin, ObjectRefTable tileLut);
 
         /// <summary>
-        /// ´ÓµØÍ¼µÄÖ¸¶¨Î»ÖÃµ¼Èë
+        /// ä»åœ°å›¾çš„æŒ‡å®šä½ç½®å¯¼å…¥
         /// </summary>
         /// <param name="map"></param>
         /// <param name="region"></param>

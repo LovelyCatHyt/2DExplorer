@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Unitilities.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,20 +11,20 @@ namespace TileDataIO
     public abstract class AbstractTileDataFormat : ITileDataFormat
     {
         /// <summary>
-        /// Ô­µã
+        /// åŸç‚¹
         /// </summary>
         public Vector3Int originPos;
         /// <summary>
-        /// ´Ó Tile µÄÃû×Ö²éÕÒÊı¾İ±íÄÚµÄË÷ÒıµÄ²éÕÒ±í, ÓÃÓÚ´ÓµØÍ¼±£´æÊı¾İ
+        /// ä» Tile çš„åå­—æŸ¥æ‰¾æ•°æ®è¡¨å†…çš„ç´¢å¼•çš„æŸ¥æ‰¾è¡¨, ç”¨äºä»åœ°å›¾ä¿å­˜æ•°æ®
         /// </summary>
         protected Dictionary<string, int> _tileName2ID_LUT = new Dictionary<string, int>();
         /// <summary>
-        /// ´ÓË÷ÒıÖ±½Ó»ñÈ¡ Tile µÄÃû×Ö, ÊÇĞèÒª±£´æµÄÊı¾İ
+        /// ä»ç´¢å¼•ç›´æ¥è·å– Tile çš„åå­—, æ˜¯éœ€è¦ä¿å­˜çš„æ•°æ®
         /// </summary>
         [JsonProperty("tileNames")]
         protected List<string> _tileNameList = new List<string>();
         /// <summary>
-        /// ´ÓË÷ÒıÖ±½Ó»ñÈ¡ TileBase µÄÊµÀı, ÓÃÓÚ´ÓÊı¾İ»¹Ô­µØÍ¼
+        /// ä»ç´¢å¼•ç›´æ¥è·å– TileBase çš„å®ä¾‹, ç”¨äºä»æ•°æ®è¿˜åŸåœ°å›¾
         /// </summary>
         protected List<TileBase> _tileList = new List<TileBase>();
 
@@ -34,29 +35,28 @@ namespace TileDataIO
         }
 
         /// <summary>
-        /// ¹¹½¨ TileList
+        /// æ„å»º TileList
         /// </summary>
-        /// <param name="tileLUT"></param>
-        protected void BuildTileList(Dictionary<string, TileBase> tileLUT)
+        /// <param name="tileLut"></param>
+        protected void BuildTileList(ObjectRefTable tileLut)
         {
-            // "null" ´ú±í¿ÕÍßÆ¬
-            tileLUT["null"] = null;
-            for (var i = 0; i < _tileNameList.Count; i++)
+            foreach (var tileName in _tileNameList)
             {
-                if(tileLUT.TryGetValue(_tileNameList[i], out var tile))
+                try
                 {
+                    var tile = tileLut[tileName] as TileBase;
                     _tileList.Add(tile);
                 }
-                else
+                catch (KeyNotFoundException)
                 {
-                    Debug.LogError($"{_tileNameList[i]} not found in tileLUT. please check the tileLUT or the tileNames in the data.");
+                    Debug.LogError($"{tileName} not found in tileLUT. please check the tileLUT or the tileNames in the data.");
                     _tileList.Add(null);
                 }
             }
         }
 
         /// <summary>
-        /// ´Ó ID »ñÈ¡Ò»¸ö Tile µÄÃû×Ö
+        /// ä» ID è·å–ä¸€ä¸ª Tile çš„åå­—
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -73,14 +73,14 @@ namespace TileDataIO
         }
 
         /// <summary>
-        /// »ñÈ¡ÍßÆ¬ÔÚÊı¾İÊµÀıÖĞ¶ÔÓ¦µÄID
+        /// è·å–ç“¦ç‰‡åœ¨æ•°æ®å®ä¾‹ä¸­å¯¹åº”çš„ID
         /// </summary>
         /// <param name="tile"></param>
         /// <returns></returns>
         protected int GetIDOfTile(TileBase tile)
         {
             if (tile == null) return 0;
-            // ±íÀïÃ»ÓĞÕâ¸ö Tile ¾Í¼ÇÂ¼Ò»ÏÂ
+            // è¡¨é‡Œæ²¡æœ‰è¿™ä¸ª Tile å°±è®°å½•ä¸€ä¸‹
             if (!_tileName2ID_LUT.ContainsKey(tile.name))
             {
                 _tileName2ID_LUT.Add(tile.name, _tileNameList.Count);
@@ -90,7 +90,7 @@ namespace TileDataIO
         }
 
         public abstract void ImportFromMap(Tilemap map, BoundsInt region);
-        public abstract void ExportToMap(Tilemap map, Vector3Int origin, Dictionary<string, TileBase> tileLUT);
+        public abstract void ExportToMap(Tilemap map, Vector3Int origin, ObjectRefTable tileLut);
     }
 
 }

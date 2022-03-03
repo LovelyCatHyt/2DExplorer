@@ -4,23 +4,30 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using Tiles;
+using Unitilities.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Zenject;
 
 namespace TileDataIO
 {
     /// <summary>
-    /// ÍßÆ¬µØÍ¼Êı¾İ¹ÜÀíÆ÷
+    /// ç“¦ç‰‡åœ°å›¾æ•°æ®ç®¡ç†å™¨
     /// </summary>
     public class TileDataMgr : MonoBehaviour
     {
         /// <summary>
-        /// ÍßÆ¬×ÊÔ´ÁĞ±í
+        /// ç“¦ç‰‡èµ„æºåˆ—è¡¨
         /// </summary>
-        public TileBase[] tileAssets; 
+        public ObjectRefTable tileTable;
+        /// <summary>
+        /// å®ä½“é¢„åˆ¶ä½“åˆ—è¡¨
+        /// </summary>
+        public ObjectRefTable entityTable;
         public Formatting jsonFormat;
         /// <summary>
-        /// µØÍ¼Êı¾İÎÄ¼ş¼ĞÏà¶ÔÂ·¾¶
+        /// åœ°å›¾æ•°æ®æ–‡ä»¶å¤¹ç›¸å¯¹è·¯å¾„
         /// </summary>
         public string tileDataDirectoryRelative
 #if UNITY_EDITOR
@@ -28,33 +35,33 @@ namespace TileDataIO
 #else
         = "TileData/";
 #endif
+        public string entityDataPathRelative
+#if UNITY_EDITOR
+        = "../TileData/Entities.json";
+#else
+        = "TileData/Entities.json";
+#endif
+
+        [Inject] private TilemapManager _tilemapManager;
 
         /// <summary>
-        /// ±£´æÕû¸öÍø¸ñÀïµÄµØÍ¼
+        /// ä¿å­˜æ•´ä¸ªç½‘æ ¼é‡Œçš„åœ°å›¾
         /// </summary>
         /// <param name="grid"></param>
-        public void SaveWholeGrid(GameObject grid)
+        public void SaveWholeGrid()
         {
-            // ±éÀúÃ¿¸ö×Ó Transform
-            foreach (var tilemapTran in grid.transform)
-            {
-                var tilemap = ((Transform) tilemapTran).GetComponent<Tilemap>();
-                SaveTileMap(tilemap);
-            }
+            _tilemapManager.GetAllTilemaps().ForEach(map => SaveTileMap(map));
+            SaveEntityData();
         }
 
-        public void LoadWholeGrid(GameObject grid)
+        public void LoadWholeGrid()
         {
-            // ±éÀúÃ¿¸ö×Ó Transform
-            foreach (var tilemapTran in grid.transform)
-            {
-                var tilemap = ((Transform)tilemapTran).GetComponent<Tilemap>();
-                LoadTileMap(tilemap);
-            }
+            _tilemapManager.GetAllTilemaps().ForEach(map => LoadTileMap(map));
+            LoadEntityData();
         }
 
         /// <summary>
-        /// ±£´æÕû¸öµØÍ¼
+        /// ä¿å­˜æ•´ä¸ªåœ°å›¾
         /// </summary>
         /// <param name="map"></param>
         /// <param name="layerName"></param>
@@ -76,7 +83,7 @@ namespace TileDataIO
         }
 
         /// <summary>
-        /// ÔØÈëÕû¸öµØÍ¼
+        /// è½½å…¥æ•´ä¸ªåœ°å›¾
         /// </summary>
         /// <param name="map"></param>
         /// <param name="layerName"></param>
@@ -88,7 +95,7 @@ namespace TileDataIO
             }
             if (string.IsNullOrEmpty(layerName)) layerName = map.name;
             var fullPath = Path.Combine(Application.dataPath, tileDataDirectoryRelative, $"{layerName}.json");
-            var jsonText = "";
+            string jsonText;
             try
             {
                 jsonText = File.ReadAllText(fullPath);
@@ -100,13 +107,54 @@ namespace TileDataIO
             }
 
             var data = JsonConvert.DeserializeObject<TileDataArrayDict>(jsonText);
-            var tileDict = tileAssets.ToDictionary(x => x.name, x => x);
-            tileDict["null"] = null;
             map.ClearAllTiles();
-            data.ExportToMap(map, data.originPos, tileDict);
+            data.ExportToMap(map, data.originPos, tileTable);
             map.CompressBounds();
         }
 
+        /// <summary>
+        /// ä¿å­˜å®ä½“æ•°æ®
+        /// </summary>
+        public void SaveEntityData()
+        {
+            // å–è¡¨
+            var entities = _tilemapManager.GetAllGameObjects();
+            var path = Path.Combine(Application.dataPath, entityDataPathRelative);
+            // å­˜æ–‡ä»¶
+            File.WriteAllText(path, JsonConvert.SerializeObject(entities, Formatting.Indented));
+        }
+
+        /// <summary>
+        /// åŠ è½½å®ä½“æ•°æ®
+        /// </summary>
+        public void LoadEntityData()
+        {
+            var path = Path.Combine(Application.dataPath, entityDataPathRelative);
+            List<EntityData> entities;
+            try
+            {
+                entities = JsonConvert.DeserializeObject<List<EntityData>>(File.ReadAllText(path));
+            }
+            catch (FileNotFoundException)
+            {
+                Debug.LogError($"Entity data not found! check if the path is valid: {path}");
+                return;
+            }
+            if (entities != null)
+            {
+                _tilemapManager.RemoveAllGameObject();
+
+                foreach (var entity in entities)
+                {
+                    // æ·»åŠ è®°å½•çš„ç‰©ä½“, å¹¶åº”ç”¨ç›¸å…³æ•°æ®
+                    _tilemapManager.AddGameObject(entity.position, (GameObject)entityTable[entity.prefabName], o => entity.AddExtraData(o));
+                }
+            }
+            else
+            {
+                Debug.Log("Entity data is empty!");
+            }
+        }
     }
 
 }

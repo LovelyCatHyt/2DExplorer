@@ -1,0 +1,24 @@
+[
+  {
+    "position": {
+      "x": 19,
+      "y": -13,
+      "z": 0
+    },
+    "name": "CheckPoint",
+    "extraData": {
+      "CheckPoint.index": 1
+    }
+  },
+  {
+    "position": {
+      "x": -15,
+      "y": -15,
+      "z": 0
+    },
+    "name": "CheckPoint",
+    "extraData": {
+      "CheckPoint.index": 0
+    }
+  }
+]
