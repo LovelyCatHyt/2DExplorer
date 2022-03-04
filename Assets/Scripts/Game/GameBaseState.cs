@@ -47,5 +47,8 @@ namespace Game
 
         public static void ChangeGameState<T>(this IFsm<GameInstance> fsm) where T : GameBaseState =>
             fsm.GameState().ChangeGameState<T>(fsm);
+
+        public static bool TryChangeGameState<T>(this IFsm<GameInstance> fsm) where T : GameBaseState =>
+            fsm.GameState().TryChangeState<T>(fsm);
     }
 }

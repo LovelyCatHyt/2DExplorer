@@ -77,8 +77,10 @@ namespace Game
         }
 
         public StateChangeEvents events = new StateChangeEvents();
+        public GameState State => _fsm.GameState().StateEnum;
 
         [Inject] private FsmComponent _fsmComponent;
+        [Inject] private BaseComponent _baseComponent;
         [Inject] private TileDataMgr _tileDataMgr;
         private IFsm<GameInstance> _fsm;
         
@@ -101,6 +103,26 @@ namespace Game
             _tileDataMgr.LoadWholeGrid();
             _fsm.ChangeGameState<InGame>();
         }
+
+        public void SaveGame()
+        {
+            _fsm.ChangeGameState<Saving>();
+            _tileDataMgr.SaveWholeGrid();
+            _fsm.ChangeGameState<InGame>();
+        }
+
+        public void Pause()
+        {
+            _fsm.ChangeGameState<Paused>();
+            _baseComponent.GameSpeed = 0;
+        }
+
+        public void Resume()
+        {
+            _fsm.ChangeGameState<InGame>();
+            _baseComponent.GameSpeed = 1;
+        }
+
     }
 
 }

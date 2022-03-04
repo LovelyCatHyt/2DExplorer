@@ -54,16 +54,12 @@ namespace Game
             {
                 var type = typeof(T);
                 if (type == typeof(InGame)) return true;
-                
-                if (type == typeof(Paused))
-                {
-                    ChangeState<Paused>(fsm);
-                    return true;
-                }
 
-                if (type == typeof(Loading))
+                if (type == typeof(Paused) ||
+                    type == typeof(Loading) ||
+                    type == typeof(Saving))
                 {
-                    ChangeState<Loading>(fsm);
+                    ChangeState<T>(fsm);
                     return true;
                 }
 

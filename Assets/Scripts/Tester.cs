@@ -25,12 +25,37 @@ public class Tester : MonoBehaviour
     [Inject]
     public void Init()
     {
-        _gameInstance.events.onGameStart.AddListener(GameStart);
+        var events = _gameInstance.events;
+        events.onGameStart.AddListener(GameStart);
+        events.onBeforeSave.AddListener(BeforeSaving);
+        events.onSaveFinished.AddListener(SavedFinished);
+        events.onBeforePause.AddListener(Pause);
+        events.onPauseResumed.AddListener(Resume);
+    }
+
+    private void Resume()
+    {
+        Debug.Log($"Resumed! Time.fixedDeltaTime = {Time.fixedDeltaTime}, deltaTime = {Time.deltaTime}");
+    }
+
+    private void Pause()
+    {
+        Debug.Log($"Paused! Time.fixedDeltaTime = {Time.fixedDeltaTime}, deltaTime = {Time.deltaTime}");
     }
 
     private void GameStart()
     {
         Debug.Log("Game start!");
+    }
+
+    private void BeforeSaving()
+    {
+        Debug.Log("InGame->Saving");
+    }
+
+    private void SavedFinished()
+    {
+        Debug.Log("Saving->InGame");
     }
 
     private void Update()

@@ -11,14 +11,37 @@ namespace Editor
         {
             base.OnInspectorGUI();
 
-            var game = (GameInstance) target;
+            var game = (GameInstance)target;
 
             if (EditorApplication.isPlaying)
             {
-                if (GUILayout.Button("Load"))
+                using (new EditorGUILayout.HorizontalScope())
                 {
-                    game.LoadGame();
+                    if (GUILayout.Button("Save"))
+                    {
+                        game.SaveGame();
+                    }
+
+                    if (GUILayout.Button("Load"))
+                    {
+                        game.LoadGame();
+                    }
                 }
+
+
+                var showPauseOrResume = game.State == GameState.Paused || game.State == GameState.InGame;
+                if (showPauseOrResume && GUILayout.Button(game.State == GameState.Paused ? "Resume" : "Paused"))
+                {
+                    if (game.State == GameState.Paused)
+                    {
+                        game.Resume();
+                    }
+                    else
+                    {
+                        game.Pause();
+                    }
+                }
+
             }
         }
     }

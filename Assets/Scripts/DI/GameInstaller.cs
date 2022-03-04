@@ -32,8 +32,12 @@ namespace DI
             Container.Bind<AudioManager>().FromInstance(audioManager.audioManager);
             Container.Bind<TilemapManager>().FromInstance(tilemapManager);
             Container.Bind<TileDataMgr>().FromInstance(tileDataMgr);
+            // UnityGameFramework 系列
             Container.Bind<FsmComponent>().FromComponentInChildren();
+            Container.Bind<BaseComponent>().FromComponentInChildren();
             Container.Bind<GameInstance>().FromComponentOnRoot();
+
+
             // 处理 GameObjectPool 的实例化操作, 使其实现自动注入
             bulletPool.onPrefabInstantiate.AddListener(Inject);
             explosionPool.onPrefabInstantiate.AddListener(Inject);
