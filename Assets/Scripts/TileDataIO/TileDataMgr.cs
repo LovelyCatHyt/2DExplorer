@@ -29,13 +29,13 @@ namespace TileDataIO
         /// <summary>
         /// 地图数据文件夹相对路径
         /// </summary>
-        public string tileDataDirectoryRelative
+        public const string TileDataDirectoryRelative
 #if UNITY_EDITOR
         = "../TileData/";
 #else
         = "TileData/";
 #endif
-        public string entityDataPathRelative
+        public const string EntityDataPathRelative
 #if UNITY_EDITOR
         = "../TileData/Entities.json";
 #else
@@ -76,7 +76,7 @@ namespace TileDataIO
             var data = new TileDataArrayDict();
             data.ImportFromMap(map, map.cellBounds);
             string jsonText = JsonConvert.SerializeObject(data, jsonFormat);
-            var directory = Path.Combine(Application.dataPath, tileDataDirectoryRelative);
+            var directory = Path.Combine(Application.dataPath, TileDataDirectoryRelative);
             Directory.CreateDirectory(directory);
             var fullPath = Path.Combine(directory, $"{layerName}.json");
             File.WriteAllText(fullPath, jsonText);
@@ -94,7 +94,7 @@ namespace TileDataIO
                 Debug.LogError("To save map is null."); return;
             }
             if (string.IsNullOrEmpty(layerName)) layerName = map.name;
-            var fullPath = Path.Combine(Application.dataPath, tileDataDirectoryRelative, $"{layerName}.json");
+            var fullPath = Path.Combine(Application.dataPath, TileDataDirectoryRelative, $"{layerName}.json");
             string jsonText;
             try
             {
@@ -119,7 +119,7 @@ namespace TileDataIO
         {
             // 取表
             var entities = _tilemapManager.GetAllGameObjects();
-            var path = Path.Combine(Application.dataPath, entityDataPathRelative);
+            var path = Path.Combine(Application.dataPath, EntityDataPathRelative);
             // 存文件
             File.WriteAllText(path, JsonConvert.SerializeObject(entities, Formatting.Indented));
         }
@@ -129,7 +129,7 @@ namespace TileDataIO
         /// </summary>
         public void LoadEntityData()
         {
-            var path = Path.Combine(Application.dataPath, entityDataPathRelative);
+            var path = Path.Combine(Application.dataPath, EntityDataPathRelative);
             List<EntityData> entities;
             try
             {
@@ -147,7 +147,7 @@ namespace TileDataIO
                 foreach (var entity in entities)
                 {
                     // 添加记录的物体, 并应用相关数据
-                    _tilemapManager.AddGameObject(entity.position, (GameObject)entityTable[entity.prefabName], o => entity.AddExtraData(o));
+                    _tilemapManager.AddGameObject(entity.position, (GameObject)entityTable[entity.prefabName], o => entity.ApplyExtraData(o));
                 }
             }
             else

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Audio;
 using Entity;
+using Game;
 using TileDataIO;
 using Tiles;
 using Unitilities;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityGameFramework.Runtime;
 using Zenject;
 
 namespace DI
@@ -30,6 +32,8 @@ namespace DI
             Container.Bind<AudioManager>().FromInstance(audioManager.audioManager);
             Container.Bind<TilemapManager>().FromInstance(tilemapManager);
             Container.Bind<TileDataMgr>().FromInstance(tileDataMgr);
+            Container.Bind<FsmComponent>().FromComponentInChildren();
+            Container.Bind<GameInstance>().FromComponentOnRoot();
             // 处理 GameObjectPool 的实例化操作, 使其实现自动注入
             bulletPool.onPrefabInstantiate.AddListener(Inject);
             explosionPool.onPrefabInstantiate.AddListener(Inject);

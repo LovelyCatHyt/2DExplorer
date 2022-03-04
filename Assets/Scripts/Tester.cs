@@ -1,17 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Audio;
-using Newtonsoft.Json;
+using Game;
 using TileDataIO;
 using Tiles;
-using TileTool;
-using Unitilities.DebugUtil;
 using Unitilities.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Unitilities.PropAttr;
 using Zenject;
 using Object = UnityEngine.Object;
 
@@ -27,6 +20,18 @@ public class Tester : MonoBehaviour
     public ObjectRefTable objectRefTable;
     [Inject] private AudioManager _audioManager;
     [Inject] private TilemapManager _tilemapManager;
+    [Inject] private GameInstance _gameInstance;
+
+    [Inject]
+    public void Init()
+    {
+        _gameInstance.events.onGameStart.AddListener(GameStart);
+    }
+
+    private void GameStart()
+    {
+        Debug.Log("Game start!");
+    }
 
     private void Update()
     {

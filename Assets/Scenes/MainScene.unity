@@ -8731,6 +8731,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3263264409510000782, guid: fc97e2dc2619e464b8b14e27bceda451, type: 3}
+      propertyPath: bulletPool
+      value: 
+      objectReference: {fileID: 630527334}
+    - target: {fileID: 3263264409510000782, guid: fc97e2dc2619e464b8b14e27bceda451, type: 3}
+      propertyPath: tileDataMgr
+      value: 
+      objectReference: {fileID: 2098086350}
+    - target: {fileID: 3263264409510000782, guid: fc97e2dc2619e464b8b14e27bceda451, type: 3}
+      propertyPath: explosionPool
+      value: 
+      objectReference: {fileID: 1642674924}
+    - target: {fileID: 3263264409510000782, guid: fc97e2dc2619e464b8b14e27bceda451, type: 3}
+      propertyPath: tilemapManager
+      value: 
+      objectReference: {fileID: 2098086352}
     - target: {fileID: 3470406875469295596, guid: fc97e2dc2619e464b8b14e27bceda451, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -12,7 +12,7 @@ namespace Editor
         {
             base.OnInspectorGUI();
             var mgr = (TileDataMgr)target;
-            if (!EditorApplication.isPlayingOrWillChangePlaymode)
+            if (!EditorApplication.isPlaying)
             {
                 EditorGUILayout.HelpBox("Can not use help button at Editor mode.", MessageType.Info);
                 return;

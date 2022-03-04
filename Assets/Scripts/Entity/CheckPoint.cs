@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Game;
 using Tiles;
 using UnityEngine;
 using Zenject;
@@ -27,25 +28,25 @@ namespace Entity
         {
             get
             {
-                var dict = new Dictionary<string, object>{{"CheckPoint.index", index}};
+                var dict = new Dictionary<string, object> { { "CheckPoint.index", index } };
                 return dict;
             }
             set
             {
-                if (value.TryGetValue("CheckPoint.index", out var i))
+                if (value == null) return;
+                if (!value.TryGetValue("CheckPoint.index", out var i)) return;
+                try
                 {
-                    try
-                    {
-                        index = (int)i;
-                    }
-                    catch (InvalidCastException)
-                    {
-                        Debug.LogWarning("Found an invalid extra data with key \"CheckPoint.index\"!");
-                    }
+                    index = Convert.ToInt32(i);
+                }
+                catch (InvalidCastException)
+                {
+                    Debug.LogWarning($"Found an invalid extra data with key \"CheckPoint.index\"! value type is {i.GetType().Name}");
                 }
             }
         }
 
+        [Inject] private GameInstance _game;
         [Inject] private TilemapManager _tilemapManager;
         private readonly int _emissionProp = Shader.PropertyToID("_Emission");
         private Material _material;
@@ -59,13 +60,22 @@ namespace Entity
         private void Awake()
         {
             _material = GetComponent<Renderer>().material;
-            _material.SetColor(_emissionProp, index == 0 ? activatedColor : initColor);
+        }
+
+        [Inject]
+        private void Init(MainCharacter mainCharacter)
+        {
+            if (index != 0) return;
+            connectedChar = mainCharacter;
+            connectedChar.currentCheckPoint = this;
+            connectedChar.startCheckPoint = this;
         }
 
         private void Start()
         {
             // 由于在实例化的过程中就会调用 Awake, 无法保证注入成功, 因此在 Start 中才能调用需要被注入的字段
             _tilemapManager.RecordGameObject(gameObject);
+            _material.SetColor(_emissionProp, index == 0 ? activatedColor : initColor);
         }
 
         private void DisConnect()
