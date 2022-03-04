@@ -1,6 +1,7 @@
 using System;
 using Audio;
 using CharCtrl;
+using Game;
 using Unitilities;
 using UnityEngine;
 using Zenject;
@@ -42,13 +43,19 @@ namespace Entity
         /// </summary>
         private Collider2D _turretCollider;
 
+        [Inject]
+        private void Init(GameInstance game)
+        {
+            game.events.onBeforeLoading.AddListener(() => _bulletPool.Push(gameObject));
+        }
+
         public virtual void Init(Vector3 position, Vector3 target, Collider2D fromTurret)
         {
             transform.position = position;
             direction = (target - position).normalized;
             _turretCollider = fromTurret;
         }
-        
+
         private void FixedUpdate()
         {
             transform.position += direction * (speed * Time.fixedDeltaTime);

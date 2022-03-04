@@ -4,7 +4,7 @@ using UnityEngine;
 namespace CharCtrl
 {
     /// <summary>
-    /// ½ÇÉ«¿ØÖÆ
+    /// è§’è‰²æŽ§åˆ¶
     /// </summary>
     public class MainCharCtrl : MonoBehaviour
     {
