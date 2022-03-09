@@ -1,4 +1,5 @@
 using Audio;
+using Effect;
 using Game;
 using Unitilities;
 using UnityEngine;
@@ -12,7 +13,15 @@ namespace Entity
     public class MainCharacter : MonoBehaviour, IRole
     {
         public double initHealth = 100;
-        public double health = 100;
+        public double Health
+        {
+            get => _health;
+            set
+            {
+                _health = value;
+                _hpEffect.Hp = (float)(_health / initHealth);
+            }
+        }
         /// <summary>
         /// 游戏开始时的检查点
         /// </summary>
@@ -25,6 +34,8 @@ namespace Entity
 
         [Inject] private GameInstance _game;
         [Inject] private AudioManager _audioManager;
+        [SerializeField] private HpEffect _hpEffect;
+        [SerializeField] private double _health = 100;
 
         private void Awake()
         {
@@ -36,14 +47,14 @@ namespace Entity
 
         private void Init()
         {
-            health = initHealth;
+            Health = initHealth;
             transform.SetPosition2D(currentCheckPoint.transform.position);
         }
 
         public void Damaged(double value)
         {
-            health -= value;
-            if (health < 0)
+            Health -= value;
+            if (Health < 0)
             {
                 Dead();
             }

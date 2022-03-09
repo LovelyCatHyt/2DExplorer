@@ -6810,8 +6810,6 @@ MonoBehaviour:
   tileTable: {fileID: 11400000, guid: 89e945a1b336eec46b4fbdffc9311b09, type: 2}
   entityTable: {fileID: 11400000, guid: b9629cdf04596fe47873f5052ab04638, type: 2}
   jsonFormat: 1
-  tileDataDirectoryRelative: ../TileData/
-  entityDataPathRelative: ../TileData/Entities.json
 --- !u!114 &2098086351
 MonoBehaviour:
   m_ObjectHideFlags: 0
