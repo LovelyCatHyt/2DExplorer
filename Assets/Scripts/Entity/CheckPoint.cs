@@ -74,11 +74,11 @@ namespace Entity
         private void Start()
         {
             // 由于在实例化的过程中就会调用 Awake, 无法保证注入成功, 因此在 Start 中才能调用需要被注入的字段
-            _tilemapManager.RecordGameObject(gameObject);
+            // _tilemapManager.RecordGameObject(gameObject);
             _material.SetColor(_emissionProp, index == 0 ? activatedColor : initColor);
         }
 
-        private void DisConnect()
+        private void Disconnect()
         {
             connectedChar = null;
             _material.DOColor(disconnectColor, _emissionProp, colorChangeDuration);
@@ -91,8 +91,7 @@ namespace Entity
             if (character.currentCheckPoint.index < index)
             {
                 // 断开上一个检查点的连接, 重定位到 this
-                // TODO: 考虑各种异常情况, 比如重载地图后的 MRE
-                character.currentCheckPoint.DisConnect();
+                character.currentCheckPoint.Disconnect();
                 character.currentCheckPoint = this;
                 connectedChar = character;
                 _material.DOColor(activatedColor, _emissionProp, colorChangeDuration);

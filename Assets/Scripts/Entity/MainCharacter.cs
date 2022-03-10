@@ -19,6 +19,15 @@ namespace Entity
             set
             {
                 _health = value;
+                if (_health < 0)
+                {
+                    Dead();
+                }
+
+                if (_health > initHealth)
+                {
+                    _health = initHealth;
+                }
                 _hpEffect.Hp = (float)(_health / initHealth);
             }
         }
@@ -51,13 +60,19 @@ namespace Entity
             transform.SetPosition2D(currentCheckPoint.transform.position);
         }
 
+        public void HealDirectly(double value)
+        {
+            Health += value;
+        }
+
+        public void HealByPercent(double value)
+        {
+            Health += initHealth * value;
+        }
+
         public void Damaged(double value)
         {
             Health -= value;
-            if (Health < 0)
-            {
-                Dead();
-            }
         }
 
         public void Dead()

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Sound
   m_EditorClassIdentifier: 
   volume: 1
-  maxAudioSource: 10
+  maxAudioSource: 20
