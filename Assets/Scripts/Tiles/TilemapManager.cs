@@ -154,14 +154,14 @@ namespace Tiles
         /// </summary>
         /// <param name="position"></param>
         /// <param name="prefab"></param>
-        public void AddGameObject(Vector3Int position, GameObject prefab, Action<GameObject> afterInstantiate = null)
+        public GameObject AddGameObject(Vector3Int position, GameObject prefab, Action<GameObject> afterInstantiate = null)
         {
             var instance = Instantiate(prefab, GetCellCenterWorld(position), Quaternion.identity, transform);
             instance.name = $"{prefab.name} {position}";
             _container.InjectGameObject(instance);
             afterInstantiate?.Invoke(instance);
             RecordGameObject(position, instance);
-
+            return instance;
         }
 
         /// <summary>

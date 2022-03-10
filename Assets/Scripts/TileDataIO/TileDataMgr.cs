@@ -143,11 +143,16 @@ namespace TileDataIO
             if (entities != null)
             {
                 _tilemapManager.RemoveAllGameObject();
-
+                var instanceArray = new List<GameObject>(entities.Count);
                 foreach (var entity in entities)
                 {
-                    // 添加记录的物体, 并应用相关数据
-                    _tilemapManager.AddGameObject(entity.position, (GameObject)entityTable[entity.prefabName], o => entity.ApplyExtraData(o));
+                    // 添加记录的物体, 并记录实例化后的 GO
+                    instanceArray.Add(_tilemapManager.AddGameObject(entity.position, (GameObject)entityTable[entity.prefabName]));
+                }
+                // 应用额外的数据
+                for (var i = 0; i < entities.Count; i++)
+                {
+                    entities[i].ApplyExtraData(instanceArray[i]);
                 }
             }
             else

@@ -43,11 +43,13 @@ namespace Entity
                 {
                     Debug.LogWarning($"Found an invalid extra data with key \"CheckPoint.index\"! value type is {i.GetType().Name}");
                 }
+                Init();
             }
         }
 
         [Inject] private GameInstance _game;
         [Inject] private TilemapManager _tilemapManager;
+        [Inject] private MainCharacter _mainCharacter;
         private readonly int _emissionProp = Shader.PropertyToID("_Emission");
         private Material _material;
 
@@ -63,10 +65,14 @@ namespace Entity
         }
 
         [Inject]
-        private void Init(MainCharacter mainCharacter)
+        private void Init()
         {
-            if (index != 0) return;
-            connectedChar = mainCharacter;
+            if (index != 0)
+            {
+                connectedChar = null;
+                return;
+            }
+            connectedChar = _mainCharacter;
             connectedChar.currentCheckPoint = this;
             connectedChar.startCheckPoint = this;
         }
