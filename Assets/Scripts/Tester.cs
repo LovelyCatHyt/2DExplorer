@@ -1,7 +1,9 @@
 using Audio;
 using Game;
+using Newtonsoft.Json;
 using TileDataIO;
 using Tiles;
+using Unitilities;
 using Unitilities.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -76,8 +78,8 @@ public class Tester : MonoBehaviour
     [ContextMenu("Test")]
     public void Test()
     {
-        object a = (int) 1;
-        var b = (Object)a;
+        Bounds2D b = new Bounds2D();
+        Debug.Log(JsonConvert.SerializeObject(b));
     }
 
     [ContextMenu("Test Play Sound")]

@@ -6,6 +6,7 @@ namespace Entity
     /// <summary>
     /// 实体, 具备一些通用的行为和信息
     /// </summary>
+    [AddComponentMenu("GameMain/Entity")]
     public class Entity : MonoBehaviour
     {
 

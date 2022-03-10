@@ -1,13 +1,62 @@
 [
   {
     "position": {
-      "x": 19,
+      "x": 28,
       "y": -13,
       "z": 0
     },
-    "name": "CheckPoint",
+    "name": "CamGizmos",
     "extraData": {
-      "CheckPoint.index": 1
+      "CameraBoundSetter.bounds": {
+        "center": {
+          "x": 27.0,
+          "y": -12.5
+        },
+        "extents": {
+          "x": 13.0,
+          "y": 4.5
+        }
+      }
+    }
+  },
+  {
+    "position": {
+      "x": 6,
+      "y": -7,
+      "z": 0
+    },
+    "name": "CamGizmos",
+    "extraData": {
+      "CameraBoundSetter.bounds": {
+        "center": {
+          "x": 5.5,
+          "y": -7.0
+        },
+        "extents": {
+          "x": 10.5,
+          "y": 10.0
+        }
+      }
+    }
+  },
+  {
+    "position": {
+      "x": -9,
+      "y": -13,
+      "z": 0
+    },
+    "name": "CamGizmos",
+    "extraData": {
+      "CameraBoundSetter.bounds": {
+        "center": {
+          "x": -9.0,
+          "y": -12.5
+        },
+        "extents": {
+          "x": 8.0,
+          "y": 4.5
+        }
+      }
     }
   },
   {
@@ -19,6 +68,17 @@
     "name": "CheckPoint",
     "extraData": {
       "CheckPoint.index": 0
+    }
+  },
+  {
+    "position": {
+      "x": 19,
+      "y": -13,
+      "z": 0
+    },
+    "name": "CheckPoint",
+    "extraData": {
+      "CheckPoint.index": 1
     }
   }
 ]

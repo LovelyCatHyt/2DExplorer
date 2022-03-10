@@ -97,8 +97,11 @@ namespace Entity
             if (_fireTimer >= fireInterval)
             {
                 var target = _mainChar.transform.Position2D();
+                bool hitTriggers = Physics2D.queriesHitTriggers;
+                Physics2D.queriesHitTriggers = false;
                 var hitCount = Physics2D.RaycastNonAlloc(transform.Position2D(), target - transform.Position2D(),
                     _raycastHitCache, detectRange);
+                Physics2D.queriesHitTriggers = hitTriggers;
                 if (hitCount > 1)
                 {
                     // 第一个必定是本身, 即所在的 Tilemap 或者对应的 Sprite. 所以读取第二个是否为玩家
