@@ -289,6 +289,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5576210941941446229, guid: 89d3003e05a04bd43b85f3c22db249bf, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+    - target: {fileID: 5576210941941446229, guid: 89d3003e05a04bd43b85f3c22db249bf, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6587139136423259032, guid: 89d3003e05a04bd43b85f3c22db249bf, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
     - target: {fileID: 8518954394456142862, guid: 89d3003e05a04bd43b85f3c22db249bf, type: 3}
       propertyPath: m_Name
       value: HpEffect
