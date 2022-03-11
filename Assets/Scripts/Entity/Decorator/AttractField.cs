@@ -15,7 +15,7 @@ namespace Entity.Decorator
         private void OnTriggerStay2D(Collider2D other)
         {
             var rigid = other.GetComponent<Rigidbody2D>();
-            if (rigid)
+            if (rigid && rigid.GetComponent<MainCharacter>())
             {
                 var dir = transform.Position2D() - other.transform.Position2D();
                 var magnitude = dir.magnitude;
