@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Audio;
 using Game;
 using Newtonsoft.Json;
@@ -78,8 +79,10 @@ public class Tester : MonoBehaviour
     [ContextMenu("Test")]
     public void Test()
     {
-        Bounds2D b = new Bounds2D();
-        Debug.Log(JsonConvert.SerializeObject(b));
+        HashSet<int> test = new HashSet<int>();
+        test.Add(1);
+        test.Add(1);
+        Debug.Log(test.Contains(1));
     }
 
     [ContextMenu("Test Play Sound")]
