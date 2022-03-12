@@ -73,7 +73,7 @@ namespace Entity.Gun
             }
             else
             {
-                SetAimDirection(Vector2.up);
+                // SetAimDirection(Vector2.up);
             }
 
             // 持续计时或仅检测到目标时计时
@@ -89,7 +89,7 @@ namespace Entity.Gun
             // 达到发射周期
             if (_fireTimer > interval && _target != null)
             {
-                FireInDirection(_currentDirection);
+                FireInDirection(CurrentDirection);
             }
 
             _fireTimer %= interval;

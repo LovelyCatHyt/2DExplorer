@@ -16,7 +16,7 @@ namespace Entity.Decorator
         public bool autoAimTarget = true;
         [Min(0)] public float fireEffectDuration = 0.2f;
         [ColorUsage(true, true)] public Color fireColor;
-
+        
         [SerializeField] private Transform _turretGun;
         [SerializeField] private Renderer _renderer;
         private Material _material;

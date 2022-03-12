@@ -1,6 +1,6 @@
 using System;
 using Audio;
-using CharCtrl;
+using UserCtrl;
 using Entity.Factory;
 using Game;
 using Unitilities;

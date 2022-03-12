@@ -113,9 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a187c1562f479a64c8874e8ed59725fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoAimTarget: 1
+  autoAimTarget: 0
   fireEffectDuration: 0.08
   fireColor: {r: 1.3041189, g: 1.3041189, b: 1.3041189, a: 1}
+  direction: {x: 0, y: 0}
   _turretGun: {fileID: 375886212195149812}
   _renderer: {fileID: 0}
 --- !u!114 &8251789567376414267
@@ -137,6 +138,7 @@ MonoBehaviour:
   timerBehaviour: 0
   randomInitTime: 1
   minAimingTime: 0.5
+  _currentDirection: {x: 0, y: 0}
 --- !u!1 &1850010612124302248
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +150,7 @@ GameObject:
   - component: {fileID: 1790181696118444418}
   - component: {fileID: 4197662207852198742}
   - component: {fileID: 6374302106285621974}
+  - component: {fileID: -4287952621124683265}
   m_Layer: 0
   m_Name: BasicTurret
   m_TagString: Untagged
@@ -204,3 +207,16 @@ MonoBehaviour:
   onDetectLost:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-4287952621124683265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850010612124302248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717a02054ef2699498e6bd4234fd7995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _containerSource: 2

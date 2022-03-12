@@ -16,7 +16,7 @@ namespace Entity.Gun
     public class GunBase : MonoBehaviour
     {
         public string bulletType;
-        [SerializeField] private Collider2D _turretCollider; 
+        [SerializeField] private Collider2D _turretCollider;
         [Inject] private BulletFactory _factory;
         [SerializeField] protected TurretAnim _anim;
 
@@ -49,11 +49,14 @@ namespace Entity.Gun
         /// 朝方向开火
         /// </summary>
         /// <param name="direction"></param>
-        public virtual void FireInDirection(Vector2 direction)
+        /// <param name="offset"></param>
+        public virtual void FireInDirection(Vector2 direction, Vector2 offset)
         {
-            _factory.CreateBulletInDirection(bulletType, transform.Position2D(), direction, _turretCollider);
+            _factory.CreateBulletInDirection(bulletType, transform.Position2D() + offset, direction, _turretCollider);
             _anim.OnFire();
         }
+
+        public void FireInDirection(Vector2 direction) => FireInDirection(direction, Vector2.zero);
     }
 
 }

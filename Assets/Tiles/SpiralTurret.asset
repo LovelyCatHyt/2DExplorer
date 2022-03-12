@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 211d8ff22aba72744881f2a4c06b799e, type: 3}
-  m_Name: Turret
+  m_Name: SpiralTurret
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: b6f8a12ca2fe8454d8a5760ddcb2037b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -31,6 +31,6 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 1850010612124302248, guid: 87fc7bb0ec66a2b4da8a2174d7a0497e, type: 3}
+  m_InstancedGameObject: {fileID: 6565922095241141731, guid: 654b8a3844dafd8469a28746660e8de9, type: 3}
   m_Flags: 5
   m_ColliderType: 2

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CharCtrl
+namespace UserCtrl
 {
     /// <summary>
     /// 角色控制
