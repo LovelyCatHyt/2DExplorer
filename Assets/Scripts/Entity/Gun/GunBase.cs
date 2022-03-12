@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Entity.Decorator;
 using Entity.Factory;
 using Unitilities;
 using Unitilities.PropAttr;
@@ -17,28 +18,41 @@ namespace Entity.Gun
         public string bulletType;
         [SerializeField] private Collider2D _turretCollider; 
         [Inject] private BulletFactory _factory;
+        [SerializeField] protected TurretAnim _anim;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (!_turretCollider)
             {
                 _turretCollider = GetComponent<Collider2D>();
             }
+            if (!_anim) _anim = GetComponent<TurretAnim>();
         }
 
         /// <summary>
-        /// 开火
+        /// 朝目标开火
         /// </summary>
         /// <param name="targetTran">目标的 <see cref="Transform"/></param>
         public virtual void Fire(Transform targetTran) => Fire(targetTran.position);
 
         /// <summary>
-        /// 开火
+        /// 朝目标开火
         /// </summary>
         /// <param name="target">目标位置</param>
         public virtual void Fire(Vector2 target)
         {
             _factory.CreateBullet(bulletType, transform.Position2D(), target, _turretCollider);
+            _anim.OnFire();
+        }
+
+        /// <summary>
+        /// 朝方向开火
+        /// </summary>
+        /// <param name="direction"></param>
+        public virtual void FireInDirection(Vector2 direction)
+        {
+            _factory.CreateBulletInDirection(bulletType, transform.Position2D(), direction, _turretCollider);
+            _anim.OnFire();
         }
     }
 

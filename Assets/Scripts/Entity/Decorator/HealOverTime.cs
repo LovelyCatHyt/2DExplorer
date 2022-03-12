@@ -23,11 +23,11 @@ namespace Entity.Decorator
             var heal = healPerSec * Time.fixedDeltaTime;
             if (healByPercent)
             {
-                _healTarget.HealByPercent(heal);
+                _healTarget.HealByRatio(heal);
             }
             else
             {
-                _healTarget.HealDirectly(heal);
+                _healTarget.Heal(heal);
             }
         }
 

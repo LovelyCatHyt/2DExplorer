@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: cc8d0ff9233464249953599013589758, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -113,7 +113,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a187c1562f479a64c8874e8ed59725fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoAimTarget: 1
+  fireEffectDuration: 0.08
+  fireColor: {r: 1.3041189, g: 1.3041189, b: 1.3041189, a: 1}
   _turretGun: {fileID: 375886212195149812}
+  _renderer: {fileID: 0}
 --- !u!114 &8251789567376414267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,11 +130,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab303bbea4c47eb4590925ffd18daa25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletType: 
+  bulletType: Random
   _turretCollider: {fileID: 882250083029830672}
+  _anim: {fileID: 5142788073827818555}
   interval: 1
   timerBehaviour: 0
   randomInitTime: 1
+  minAimingTime: 0.5
 --- !u!1 &1850010612124302248
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,55 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onDetected:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5142788073827818555}
-        m_TargetAssemblyTypeName: Entity.Decorator.TurretAnim, GameMain
-        m_MethodName: OnDetected
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: Entity.MainCharacter, GameMain
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8251789567376414267}
-        m_TargetAssemblyTypeName: Entity.Gun.ClockGun, GameMain
-        m_MethodName: OnDetected
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: Entity.MainCharacter, GameMain
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onDetectLost:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5142788073827818555}
-        m_TargetAssemblyTypeName: Entity.Decorator.TurretAnim, GameMain
-        m_MethodName: OnDetectLost
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: Entity.MainCharacter, GameMain
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8251789567376414267}
-        m_TargetAssemblyTypeName: Entity.Gun.ClockGun, GameMain
-        m_MethodName: OnDetectLost
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: Entity.MainCharacter, GameMain
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []

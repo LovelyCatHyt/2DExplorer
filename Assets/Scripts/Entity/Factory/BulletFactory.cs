@@ -20,7 +20,7 @@ namespace Entity.Factory
         }
 
         /// <summary>
-        /// 创建一个子弹
+        /// 创建一个朝着位置的子弹
         /// </summary>
         /// <param name="bulletType"></param>
         /// <param name="pos"></param>
@@ -34,7 +34,32 @@ namespace Entity.Factory
                 var bullet = b.GetComponent<Bullet>();
                 if (bullet)
                 {
-                    bullet.Init(pos, target, fromCollider);
+                    bullet.InitWithTarget(pos, target, fromCollider);
+                }
+                return b;
+            }
+            else
+            {
+                throw new NullReferenceException($"BulletPool of {bulletType} is empty!");
+            }
+        }
+
+        /// <summary>
+        /// 创建一个朝着指定方向的子弹
+        /// </summary>
+        /// <param name="bulletType"></param>
+        /// <param name="pos"></param>
+        /// <param name="direction"></param>
+        /// <param name="fromCollider"></param>
+        /// <returns></returns>
+        public GameObject CreateBulletInDirection(string bulletType, Vector2 pos, Vector2 direction, Collider2D fromCollider)
+        {
+            if (_bulletPoolDict[bulletType].Pop(out var b))
+            {
+                var bullet = b.GetComponent<Bullet>();
+                if (bullet)
+                {
+                    bullet.InitWithDirection(pos, direction, fromCollider);
                 }
                 return b;
             }

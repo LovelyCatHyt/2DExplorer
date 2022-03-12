@@ -50,10 +50,17 @@ namespace Entity
             _game.events.onBeforeLoading.AddListener(() => _bulletPool.Push(gameObject));
         }
 
-        public virtual void Init(Vector3 position, Vector3 target, Collider2D fromTurret)
+        public virtual void InitWithTarget(Vector3 position, Vector3 target, Collider2D fromTurret)
         {
             transform.position = position;
             direction = (target - position).normalized;
+            _turretCollider = fromTurret;
+        }
+
+        public virtual void InitWithDirection(Vector3 position, Vector3 direction, Collider2D fromTurret)
+        {
+            transform.position = position;
+            this.direction = direction.normalized;
             _turretCollider = fromTurret;
         }
 

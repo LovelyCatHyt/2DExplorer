@@ -13,19 +13,21 @@ namespace Entity.Detector
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var mainChar = other.GetComponent<MainCharacter>();
-            if (mainChar)
+            var target = other.GetComponent<IRole>();
+            if (target != null)
             {
-                onDetected?.Invoke(mainChar);
+                DetectedRole = target;
+                onDetected?.Invoke();
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            var mainChar = other.GetComponent<MainCharacter>();
-            if (mainChar)
+            var target = other.GetComponent<MainCharacter>();
+            if (target != null)
             {
-                onDetectLost?.Invoke(mainChar);
+                DetectedRole = null;
+                onDetectLost?.Invoke();
             }
         }
     }

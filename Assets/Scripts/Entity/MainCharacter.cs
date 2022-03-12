@@ -40,6 +40,7 @@ namespace Entity
         /// </summary>
         public CheckPoint currentCheckPoint;
         public AudioClip deadAudio;
+        public Transform RoleTransform => transform;
 
         [Inject] private GameInstance _game;
         [Inject] private AudioManager _audioManager;
@@ -60,12 +61,12 @@ namespace Entity
             transform.SetPosition2D(currentCheckPoint.transform.position);
         }
 
-        public void HealDirectly(double value)
+        public void Heal(double value)
         {
             Health += value;
         }
 
-        public void HealByPercent(double value)
+        public void HealByRatio(double value)
         {
             Health += initHealth * value;
         }
