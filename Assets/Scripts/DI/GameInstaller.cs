@@ -18,16 +18,12 @@ namespace DI
     /// </summary>
     public class GameInstaller : MonoInstaller
     {
-        public GameObjectPool bulletPool;
-        public GameObjectPool explosionPool;
         public AudioManagerComponent audioManager;
         public TilemapManager tilemapManager;
         public TileDataMgr tileDataMgr;
 
         public override void InstallBindings()
         {
-            Container.Bind<GameObjectPool>().WithId("Bullet Pool").FromInstance(bulletPool);
-            Container.Bind<GameObjectPool>().WithId("Explosion Pool").FromInstance(explosionPool);
             Container.Bind<MainCharacter>().FromInstance(FindObjectOfType<MainCharacter>());
             Container.Bind<AudioManager>().FromInstance(audioManager.audioManager);
             Container.Bind<TilemapManager>().FromInstance(tilemapManager);
@@ -35,15 +31,9 @@ namespace DI
             // UnityGameFramework 系列
             Container.Bind<FsmComponent>().FromComponentInChildren();
             Container.Bind<BaseComponent>().FromComponentInChildren();
-            Container.Bind<GameInstance>().FromComponentOnRoot();
-
-
-            // 处理 GameObjectPool 的实例化操作, 使其实现自动注入
-            bulletPool.onPrefabInstantiate.AddListener(Inject);
-            explosionPool.onPrefabInstantiate.AddListener(Inject);
+            Container.Bind<GameInstance>().FromComponentOnRoot().AsSingle();
+            
         }
-
-        private void Inject(GameObject go) => Container.InjectGameObject(go);
     }
 
 }

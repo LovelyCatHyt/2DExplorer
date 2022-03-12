@@ -1,15 +1,14 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using Audio;
 using Game;
-using Newtonsoft.Json;
 using TileDataIO;
 using Tiles;
-using Unitilities;
 using Unitilities.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Zenject;
-using Object = UnityEngine.Object;
+using Debug = UnityEngine.Debug;
 
 public class Tester : MonoBehaviour
 {
@@ -79,10 +78,25 @@ public class Tester : MonoBehaviour
     [ContextMenu("Test")]
     public void Test()
     {
-        HashSet<int> test = new HashSet<int>();
-        test.Add(1);
-        test.Add(1);
-        Debug.Log(test.Contains(1));
+        Dictionary<string, int> testDict = new Dictionary<string, int>
+        {
+            {"abc",1 },
+            {"abcdef", 2 },
+            {"abdefc", 3 }
+        };
+
+        int loop = 1000000;
+        Stopwatch t = new Stopwatch();
+        t.Start();
+        int temp;
+        for (int i = 0; i < loop; i++)
+        {
+            temp = testDict["abc"];
+            temp = testDict["abcdef"];
+            temp = testDict["abdefc"];
+        }
+        t.Stop();
+        Debug.Log($"Time elapsed: {t.Elapsed.TotalSeconds}, average time cost: {t.ElapsedMilliseconds*1000000/loop}ns");
     }
 
     [ContextMenu("Test Play Sound")]
@@ -90,16 +104,4 @@ public class Tester : MonoBehaviour
     {
         _audioManager.PlaySound(_audioManager.GetTrackIDFromName("BackGround"), clip);
     }
-
-    //[ContextMenu("Test Save")]
-    //public void TestSave()
-    //{
-    //    dataMgr.SaveWholeGrid(grid);
-    //}
-
-    //[ContextMenu("Test Load")]
-    //public void TestLoad()
-    //{
-    //    dataMgr.LoadWholeGrid(grid);
-    //}
 }

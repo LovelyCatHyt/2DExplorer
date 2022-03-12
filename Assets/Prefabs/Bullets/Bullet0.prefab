@@ -101,6 +101,7 @@ MonoBehaviour:
   damage: 10
   direction: {x: 0, y: 0, z: 0}
   hitSound: {fileID: 8300000, guid: 7c1c509175900424a883317eb47ade84, type: 3}
+  effectType: Explosion
 --- !u!58 &-495097202174733913
 CircleCollider2D:
   m_ObjectHideFlags: 0

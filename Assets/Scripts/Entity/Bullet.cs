@@ -1,6 +1,7 @@
 using System;
 using Audio;
 using CharCtrl;
+using Entity.Factory;
 using Game;
 using Unitilities;
 using UnityEngine;
@@ -31,22 +32,22 @@ namespace Entity
         /// </summary>
         public event Action<GameObject> onValidHit;
         public AudioClip hitSound;
+        public string effectType;
 
-        [Inject(Id = "Explosion Pool")]
-        private GameObjectPool _explosionPool;
-        [Inject(Id = "Bullet Pool")]
-        private GameObjectPool _bulletPool;
-        [Inject]
-        private AudioManager _audioManager;
+        [Inject] private EffectFactory _effectFactory;
+        [Inject] private GameObjectPool _bulletPool;
+        [Inject] private AudioManager _audioManager;
+        [Inject] private GameInstance _game;
         /// <summary>
         /// 发射这个子弹的炮塔的碰撞体
         /// </summary>
         private Collider2D _turretCollider;
 
+        
         [Inject]
-        private void Init(GameInstance game)
+        private void Init()
         {
-            game.events.onBeforeLoading.AddListener(() => _bulletPool.Push(gameObject));
+            _game.events.onBeforeLoading.AddListener(() => _bulletPool.Push(gameObject));
         }
 
         public virtual void Init(Vector3 position, Vector3 target, Collider2D fromTurret)
@@ -70,8 +71,7 @@ namespace Entity
             {
                 onValidHit?.Invoke(other.collider.gameObject);
                 role.Damaged(damage);
-                Debug.Assert(_explosionPool.Pop(out var effect));
-                effect.transform.SetPosition2D(transform.position);
+                _effectFactory.CreateEffect(effectType, transform.Position2D());
             }
             onHit = null;
             onValidHit = null;

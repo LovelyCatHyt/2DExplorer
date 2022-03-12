@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 4428160789369327299}
   - component: {fileID: 4428160789369327296}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: TurretPrimitive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   fireInterval: 1
   detectRange: 10
   fireStartDistance: 0
+  bulletType: Random
   effectRenderer: {fileID: 5729247095190719415}
   fireEffectDuration: 0.1
   fireColor: {r: 1.319508, g: 1.319508, b: 1.319508, a: 1}

@@ -30,7 +30,7 @@ namespace Effect
         /// 爆炸特效结束后的回调
         /// </summary>
         public UnityEvent onFinish;
-        [Inject(Id = "Explosion Pool")]
+        [Inject]
         private GameObjectPool _explosionPool;
 
         private Material _material_s => _material ??= GetComponent<Renderer>().material;

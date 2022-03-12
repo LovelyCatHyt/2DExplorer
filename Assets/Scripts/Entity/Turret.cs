@@ -2,6 +2,7 @@ using System;
 using Audio;
 using DG.Tweening;
 using DI;
+using Entity.Factory;
 using Tiles;
 using Unitilities;
 using UnityEngine;
@@ -28,16 +29,16 @@ namespace Entity
         /// 发射距离
         /// </summary>
         public float fireStartDistance = 1.5f;
+        public string bulletType;
         public Renderer effectRenderer;
         public float fireEffectDuration;
         [ColorUsage(true, true)] public Color fireColor;
         public AudioClip fireSound;
 
         /// <summary>
-        /// 子弹对象池
+        /// 子弹工厂
         /// </summary>
-        [Inject(Id = "Bullet Pool")]
-        private GameObjectPool _bulletPool;
+        [Inject] private BulletFactory _factory;
         [Inject]
         private AudioManager _audioManager;
         /// <summary>
@@ -128,20 +129,10 @@ namespace Entity
         /// <param name="target"></param>
         public void Fire(Vector3 target)
         {
-            // Debug.Log($"{gameObject.name} try to fire.");
-
-            if (!_bulletPool.Pop(out var bulletGO))
-            {
-                Debug.LogError($"{_bulletPool.name} can't pop bullet out. check the pool settings.");
-                return;
-            }
-
-            var bullet = bulletGO.GetComponent<Bullet>();
-            var position = transform.position;
-            bullet.Init(position + (target - position).normalized * fireStartDistance, target, _collider);
+            var bulletGO = _factory.CreateBullet(bulletType, transform.Position2D(), target, _collider);
             _material.DOKill(true);
             _material.DOColor(fireColor, fireEffectDuration * 0.5f).SetLoops(2, LoopType.Yoyo);
-            _audioManager.PlaySound(_audioManager.GetTrackIDFromName("Sound"), fireSound, position);
+            _audioManager.PlaySound(_audioManager.GetTrackIDFromName("Sound"), fireSound, transform.position);
         }
     }
 }
