@@ -2,6 +2,13 @@
 ## 游戏规则
 操纵主角在地图上避开机关的攻击, 找到出口.
 
+## 开发笔记
+
+开发过程中对某些模块的使用心得.
+
+- [Tilemap 瓦片地图](https://www.notion.so/Tilemap-3646a31a3199443ea235fe677c0d5a3c)
+- [Zenject 依赖注入](https://www.notion.so/Zenject-2e32fddea7ae417696050d8716dc4e8c)
+
 ## 项目结构
 
 ### 文件目录
