@@ -41,6 +41,7 @@ namespace Audio
                     var key = keys.Current ?? "";
                     _trackIdDictionary[key] = i;
                     _settings.Add(_settingsMap[key]);
+                    _settings[i].PropertyChanged += _trackList[i].OnSettingsChanged;
                     _trackList[i].ApplySettings(_settings[i]);
                     _trackList[i].gameObject.name = key;
                 }

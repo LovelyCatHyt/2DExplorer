@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
@@ -63,6 +64,7 @@ namespace Audio
             }
         }
         private int _maxAudioSource;
+        private AudioTrackSettings _settings;
 
         private AudioSource CreateNewAudioSource()
         {
@@ -108,15 +110,7 @@ namespace Audio
             Destroy(audioSource.gameObject);
             _audios.Remove(audioSource);
         }
-
-        private void Start()
-        {
-            for (int i = 0; i < _maxAudioSource; i++)
-            {
-                CreateNewAudioSource();
-            }
-        }
-
+        
         private void Update()
         {
             // 遍历两个列表, 将 _activeList 中播放完毕的放到 _inActiveList
@@ -131,10 +125,32 @@ namespace Audio
             }
         }
 
+        public void OnSettingsChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (sender is AudioTrackSettings settings)
+            {
+                _settings = settings;
+                if (args.PropertyName == nameof(AudioTrackSettings.Volume))
+                {
+                    Volume = settings.Volume;
+                }
+
+                if (args.PropertyName == nameof(AudioTrackSettings.MaxAudioSource))
+                {
+                    MaxAudioSource = settings.MaxAudioSource;
+                }
+            }
+        }
+
         public void ApplySettings(AudioTrackSettings settings)
         {
-            Volume = settings.volume;
-            _maxAudioSource = settings.maxAudioSource;
+            Volume = settings.Volume;
+            MaxAudioSource = settings.MaxAudioSource;
+        }
+
+        private void OnDisable()
+        {
+            if (_settings) _settings.PropertyChanged -= OnSettingsChanged;
         }
 
         public void PlaySound(AudioClip clip, bool loop = false)

@@ -1,17 +1,45 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Settings;
 
 namespace Audio
 {
     /// <summary>
     /// 音频轨道配置
     /// </summary>
-    [CreateAssetMenu(fileName ="New AudioTrack Settings", menuName = "Settings/Audio Track Settings")] 
-    public class AudioTrackSettings : ScriptableObject
+    [CreateAssetMenu(fileName = "New AudioTrack Settings", menuName = "Settings/Audio Track Settings")]
+    public class AudioTrackSettings : SettingsObject
     {
-        [Range(0, 1)] public float volume = 1;
-        [Min(1)] public int maxAudioSource = 1;
+        public float Volume
+        {
+            get => _volume;
+            set
+            {
+                if (Math.Abs(value - _volume) > 0.001f)
+                {
+                    _volume = value;
+                    OnPropertyChanged(nameof(Volume));
+                }
+            }
+        }
+
+        public int MaxAudioSource
+        {
+            get => _maxAudioSource;
+            set
+            {
+                if (value != _maxAudioSource)
+                {
+                    _maxAudioSource = value;
+                    OnPropertyChanged(nameof(MaxAudioSource));
+                }
+            }
+        }
+
+        [SerializeField] [Range(0, 1)] private float _volume = 1;
+        [SerializeField] [Min(1)] private int _maxAudioSource = 1;
     }
 
 }

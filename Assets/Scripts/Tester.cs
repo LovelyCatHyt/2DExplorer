@@ -97,36 +97,7 @@ public class Tester : MonoBehaviour
     [ContextMenu("Test")]
     public void Test()
     {
-        List<LinkNode> linkList = new List<LinkNode>();
-        int count = 4;
-        for (int i = 0; i < count; i++)
-        {
-            if(i>0)
-            {
-                linkList.Add(new LinkNode(i.GetHashCode()));
-                linkList[i - 1].next = linkList[i];
-            }else if(i==0)
-            {
-                linkList.Add(new LinkNode(i.GetHashCode()));
-            }
-            if (i == count - 1)
-            {
-                linkList[i].next = linkList[0];
-            }
-        }
-
-        JsonSerializerSettings settings = new JsonSerializerSettings
-            {ReferenceLoopHandling = ReferenceLoopHandling.Serialize};
-        var s = JsonConvert.SerializeObject(linkList[0], Formatting.Indented, settings);
-        Debug.Log(s);
-        node = JsonConvert.DeserializeObject<LinkNode>(s);
-        StringBuilder temp = new StringBuilder();
-        for (int i = 0; i < count; i++)
-        {
-            temp.AppendLine(node.val.ToString());
-            node = node.next;
-        }
-        Debug.Log(temp);
+        
     }
 
     [ContextMenu("Test Play Sound")]
