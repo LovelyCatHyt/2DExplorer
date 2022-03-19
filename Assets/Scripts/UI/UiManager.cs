@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unitilities.Serialization;
 using UnityEngine;
 
 namespace UI
@@ -9,6 +10,7 @@ namespace UI
     /// </summary>
     public class UiManager : MonoBehaviour
     {
+        // [SerializeField] private ObjectRefTable _sceneUiTable;
     }
 
 }

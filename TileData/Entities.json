@@ -1,6 +1,17 @@
 [
   {
     "position": {
+      "x": -12,
+      "y": -12,
+      "z": 0
+    },
+    "name": "SceneText",
+    "extraData": {
+      "Text": "使用 <b>WASD</b> 控制小球运动"
+    }
+  },
+  {
+    "position": {
       "x": -15,
       "y": -15,
       "z": 0
@@ -19,6 +30,17 @@
     "name": "CheckPoint",
     "extraData": {
       "CheckPoint.index": 1
+    }
+  },
+  {
+    "position": {
+      "x": 55,
+      "y": 16,
+      "z": 0
+    },
+    "name": "CheckPoint",
+    "extraData": {
+      "CheckPoint.index": 2
     }
   }
 ]

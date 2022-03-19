@@ -10,9 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20ea5a5dc94cb3d4898ed21cf7176e7d, type: 3}
-  m_Name: EntitiyTable
+  m_Name: SceneUiTable
   m_EditorClassIdentifier: 
   refList:
-  - {fileID: 4721117349237197087, guid: 86e2d6be9b4fd564ba8a4eeb7cd80f91, type: 3}
-  - {fileID: 503354535257324206, guid: 93fedc76c4a52234fa839c33c3bb735a, type: 3}
   - {fileID: 534658353509207834, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}

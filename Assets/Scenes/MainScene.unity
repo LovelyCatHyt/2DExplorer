@@ -481,7 +481,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -506,6 +506,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &174837576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 174837577}
+  m_Layer: 0
+  m_Name: SceneTexts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &174837577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174837576}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1031417919}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &319382176
 GameObject:
   m_ObjectHideFlags: 0
@@ -13138,6 +13169,76 @@ MonoBehaviour:
   _useSceneContext: 0
   _context: {fileID: 0}
   _bindType: 0
+--- !u!1001 &1031417918
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 174837577}
+    m_Modifications:
+    - target: {fileID: -5976561352778339202, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: text
+      value: "<color=#5588d8>\u4F7F\u7528 <b>WASD</b> \u63A7\u5236\u5C0F\u7403\u8FD0\u52A8</color>"
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 534658353509207834, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_Name
+      value: SceneText
+      objectReference: {fileID: 0}
+    - target: {fileID: 3136169834237528171, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+      propertyPath: m_Text
+      value: "<color=#5588d8>\u4F7F\u7528 <b>WASD</b> \u63A7\u5236\u5C0F\u7403\u8FD0\u52A8</color>"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+--- !u!4 &1031417919 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 534658353509207831, guid: 7d1642097f41fb04e9b0db592711b209, type: 3}
+  m_PrefabInstance: {fileID: 1031417918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1141944004
 GameObject:
   m_ObjectHideFlags: 0
@@ -13300,6 +13401,8 @@ MonoBehaviour:
     - {fileID: 0}
     gameObjects: []
   objectRefTable: {fileID: 11400000, guid: b9629cdf04596fe47873f5052ab04638, type: 2}
+  node:
+    val: 0
 --- !u!4 &1218542484
 Transform:
   m_ObjectHideFlags: 0
