@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 using Settings;
 
@@ -38,8 +39,8 @@ namespace Audio
             }
         }
 
-        [SerializeField] [Range(0, 1)] private float _volume = 1;
-        [SerializeField] [Min(1)] private int _maxAudioSource = 1;
+        [JsonIgnore] [SerializeField] [Range(0, 1)] private float _volume = 1;
+        [JsonIgnore] [SerializeField] [Min(1)] private int _maxAudioSource = 1;
     }
 
 }

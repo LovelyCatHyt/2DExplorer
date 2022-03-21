@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Audio;
 using Entity;
 using Game;
+using Settings;
 using TileDataIO;
 using Tiles;
 using Unitilities;
@@ -21,7 +22,7 @@ namespace DI
         public AudioManagerComponent audioManager;
         public TilemapManager tilemapManager;
         public TileDataMgr tileDataMgr;
-
+        
         public override void InstallBindings()
         {
             Container.Bind<MainCharacter>().FromInstance(FindObjectOfType<MainCharacter>());
@@ -32,7 +33,7 @@ namespace DI
             Container.Bind<FsmComponent>().FromComponentInChildren();
             Container.Bind<BaseComponent>().FromComponentInChildren();
             Container.Bind<GameInstance>().FromComponentOnRoot().AsSingle();
-            
+              
         }
     }
 

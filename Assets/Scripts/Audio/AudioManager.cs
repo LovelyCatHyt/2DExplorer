@@ -16,6 +16,7 @@ namespace Audio
         
         public List<SerializableKeyValuePair<string, AudioTrackSettings>> settingsMap_List = new List<SerializableKeyValuePair<string, AudioTrackSettings>>();
         public int TrackCount => settingsMap_List.Count;
+        public Dictionary<string, AudioTrackSettings> SettingsDict=>new Dictionary<string, AudioTrackSettings>(_settingsMap);
 
         private List<AudioTrackSettings> _settings;
         private Dictionary<string, AudioTrackSettings> _settingsMap;

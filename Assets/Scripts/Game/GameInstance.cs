@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using GameFramework.Fsm;
+using Settings;
 using TileDataIO;
 using UnityEngine;
 using UnityEngine.Events;
@@ -82,8 +84,16 @@ namespace Game
         [Inject] private FsmComponent _fsmComponent;
         [Inject] private BaseComponent _baseComponent;
         [Inject] private TileDataMgr _tileDataMgr;
+        [Inject] private AudioManager _audioManager;
+        [Inject] private SettingsManager _settingsManager;
         private IFsm<GameInstance> _fsm;
-        
+
+        [Inject]
+        private void Initialize()
+        {
+            _settingsManager.AfterSceneLoaded(_audioManager);
+        }
+
         private void Start()
         {
             _fsm = _fsmComponent.CreateFsm(this,
@@ -122,7 +132,6 @@ namespace Game
             _fsm.ChangeGameState<InGame>();
             _baseComponent.GameSpeed = 1;
         }
-
     }
 
 }

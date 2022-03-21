@@ -1,0 +1,20 @@
+{
+  "audio": {
+    "BackGround": {
+      "Volume": 0.5,
+      "MaxAudioSource": 2,
+      "name": "BackGround",
+      "hideFlags": "None",
+      "_volume": 0.5,
+      "_maxAudioSource": 2
+    },
+    "Sound": {
+      "Volume": 0.75,
+      "MaxAudioSource": 32,
+      "name": "Sound",
+      "hideFlags": "None",
+      "_volume": 0.75,
+      "_maxAudioSource": 32
+    }
+  }
+}
