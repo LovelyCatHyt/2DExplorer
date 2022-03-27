@@ -40,9 +40,12 @@
 - Entity: 实体. 如主角, 炮塔, 子弹
     - Decorator: 修饰实体的组件, 如引力场
 - Game: 游戏过程总的管理中心, 包括游戏状态的管理
+- Map: 地图管理
+- Settings: 设置项
 - TileDataIO: 瓦片数据输入输出, 管理瓦片数据的序列化, 也包括瓦片所对应的外部 GO.
 - Tiles: 瓦片类
 - TileTool: 瓦片地图相关的一些工具类
+- UI: UI相关的类
 - Unitilities: **Unitilities** 所在目录
 
 ### 引入的非官方包和插件
