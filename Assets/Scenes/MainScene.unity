@@ -14417,6 +14417,7 @@ MonoBehaviour:
   objectRefTable: {fileID: 11400000, guid: b9629cdf04596fe47873f5052ab04638, type: 2}
   node:
     val: 0
+  testRelativePath: ../
 --- !u!4 &1218542484
 Transform:
   m_ObjectHideFlags: 0

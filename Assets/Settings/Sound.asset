@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac2940c60e956342996e9f3a5c95e03, type: 3}
   m_Name: Sound
   m_EditorClassIdentifier: 
-  _volume: 1
-  _maxAudioSource: 68
+  _volume: 0.75
+  _maxAudioSource: 32

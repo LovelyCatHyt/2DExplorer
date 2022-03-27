@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Game;
+using Map;
 using Newtonsoft.Json;
 using Tiles;
 using Unitilities.Serialization;
@@ -26,23 +28,119 @@ namespace TileDataIO
         /// </summary>
         public ObjectRefTable entityTable;
         public Formatting jsonFormat;
-        /// <summary>
-        /// 地图数据文件夹相对路径
-        /// </summary>
-        public const string TileDataDirectoryRelative
+
+        // TODO: 记录当前地图的路径和(或)MapInfo, 并修改相应的 Save/Load 操作, 直接指定到对应的路径
+
+        public const string MapRootRelative
 #if UNITY_EDITOR
-        = "../TileData/";
+            = "../Maps/";
 #else
-        = "TileData/";
-#endif
-        public const string EntityDataPathRelative
-#if UNITY_EDITOR
-        = "../TileData/Entities.json";
-#else
-        = "TileData/Entities.json";
+            = "/Maps/"
 #endif
 
+        /// <summary>
+        /// 默认初始地图目录
+        /// </summary>
+        public static string DefaultMapDir => Path.Combine(Application.dataPath, MapRootRelative, "Default");
+
         [Inject] private TilemapManager _tilemapManager;
+        [Inject] private MapContext _mapContext;
+        [Inject] private GameInstance _game;
+        
+        private void Awake()
+        {
+            if (GetFirstMapInfo(out var info, out var directory))
+            {
+                _mapContext.OnMapLoaded(info, directory);
+            }
+            else
+            {
+                // 原地保存一个
+                Directory.CreateDirectory(DefaultMapDir);
+                var newInfo = MapInfo.CreateInfo();
+                _mapContext.OnMapSelected(newInfo, DefaultMapDir);
+                File.WriteAllText(Path.Combine(DefaultMapDir, "Info.json"), JsonConvert.SerializeObject(newInfo, jsonFormat));
+                // print(DefaultMapDir);
+                SaveWholeGrid();
+                Debug.Log($"No map available. save current map into <b>{Path.GetFullPath(DefaultMapDir)}</b>");
+                _mapContext.OnMapLoaded(newInfo, DefaultMapDir);
+            }
+            _game.events.onSaveFinished.AddListener(() => _mapContext.Dirty = false);
+        }
+
+        public bool GetFirstMapInfo(out MapInfo info, out string directory)
+        {
+
+            foreach (var dir in MapDirectories)
+            {
+                string infoJson;
+                try
+                {
+                    infoJson = File.ReadAllText(Path.Combine(dir, "Info.json"));
+                }
+                catch (FileNotFoundException)
+                {
+                    continue;
+                }
+                try
+                {
+                    info = JsonConvert.DeserializeObject<MapInfo>(infoJson);
+                    // 不出问题
+                    directory = dir;
+                }
+                catch (JsonReaderException)
+                {
+                    continue;
+                }
+            }
+            info = MapInfo.CreateInfo();
+            directory = "";
+            return false;
+        }
+
+        public List<MapInfo> MapInfos
+        {
+            get
+            {
+                var infoList = new List<MapInfo>();
+                foreach (var directory in MapDirectories)
+                {
+                    string infoJson;
+                    try
+                    {
+                        infoJson = File.ReadAllText(Path.Combine(directory, "Info.json"));
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        continue;
+                    }
+
+                    MapInfo info;
+                    try
+                    {
+                        info = JsonConvert.DeserializeObject<MapInfo>(infoJson);
+                    }
+                    catch (JsonReaderException)
+                    {
+                        continue;
+                    }
+                    infoList.Add(info);
+                }
+                return infoList;
+            }
+        }
+
+        /// <summary>
+        /// 从地图目录出发能找到的所有子目录的完整路径, 但不保证存在有效地图
+        /// </summary>
+        private string[] MapDirectories
+        {
+            get
+            {
+                Directory.CreateDirectory(Path.Combine(Application.dataPath, MapRootRelative));
+                return Directory.GetDirectories(Path.Combine(Application.dataPath, MapRootRelative));
+            }
+        }
 
         /// <summary>
         /// 保存整个网格里的地图
@@ -76,7 +174,7 @@ namespace TileDataIO
             var data = new TileDataArrayDict();
             data.ImportFromMap(map, map.cellBounds);
             string jsonText = JsonConvert.SerializeObject(data, jsonFormat);
-            var directory = Path.Combine(Application.dataPath, TileDataDirectoryRelative);
+            var directory = _mapContext.TileDataDirectory;
             Directory.CreateDirectory(directory);
             var fullPath = Path.Combine(directory, $"{layerName}.json");
             File.WriteAllText(fullPath, jsonText);
@@ -94,7 +192,7 @@ namespace TileDataIO
                 Debug.LogError("To save map is null."); return;
             }
             if (string.IsNullOrEmpty(layerName)) layerName = map.name;
-            var fullPath = Path.Combine(Application.dataPath, TileDataDirectoryRelative, $"{layerName}.json");
+            var fullPath = Path.Combine(_mapContext.TileDataDirectory, $"{layerName}.json");
             string jsonText;
             try
             {
@@ -119,7 +217,8 @@ namespace TileDataIO
         {
             // 取表
             var entities = _tilemapManager.GetAllGameObjects();
-            var path = Path.Combine(Application.dataPath, EntityDataPathRelative);
+            // TODO: [ToCheck] 根据 MapInfo 获取路径信息
+            var path = _mapContext.EntityDataPath;
             // 存文件
             File.WriteAllText(path, JsonConvert.SerializeObject(entities, Formatting.Indented));
         }
@@ -129,7 +228,8 @@ namespace TileDataIO
         /// </summary>
         public void LoadEntityData()
         {
-            var path = Path.Combine(Application.dataPath, EntityDataPathRelative);
+            // TODO: [ToCheck] 根据 MapInfo 获取路径信息
+            var path = _mapContext.EntityDataPath;
             List<EntityData> entities;
             try
             {
