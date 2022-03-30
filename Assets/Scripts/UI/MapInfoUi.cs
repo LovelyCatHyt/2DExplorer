@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using Map;
 using TileDataIO;
 using Ui.Prototype;
@@ -48,10 +49,10 @@ namespace Ui
         private void RefreshUi()
         {
             var info = _tempInfo = _mapContext.Info;
-            _createdTime.Value = info.createdTime.ToShortTimeString();
-            _lastEditedTime.Value = info.lastEditedTime.ToShortTimeString();
-            _author.Value = info.author;
-            _displayName.Value = info.displayName;
+            _createdTime.Value = info.createdTime.ToString(CultureInfo.CurrentCulture);
+            _lastEditedTime.Value = info.lastEditedTime.ToString(CultureInfo.CurrentCulture);
+            _author.Value = string.IsNullOrEmpty(info.author) ? "Default" : info.author;
+            _displayName.Value = string.IsNullOrEmpty(info.displayName) ? _mapContext.MapFolderName : info.displayName;
         }
 
         public void Resume()

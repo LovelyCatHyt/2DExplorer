@@ -11,7 +11,7 @@ namespace Ui
     /// 地图名字的 UI
     /// </summary>
     [RequireComponent(typeof(Text))]
-    public class MapNameUI : MonoBehaviour
+    public class MapNameUi : MonoBehaviour
     {
         [Inject] private MapContext _mapContext;
         private Text _text;

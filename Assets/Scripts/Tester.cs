@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Settings;
 using TileDataIO;
 using Tiles;
+using Ui.Prototype;
 using Unitilities.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -14,20 +15,6 @@ using Debug = UnityEngine.Debug;
 
 public class Tester : MonoBehaviour
 {
-    [Serializable]
-    public class LinkNode
-    {
-        [JsonProperty(IsReference = true)]
-        public LinkNode next;
-        public int val;
-
-        public LinkNode(int val = 0, LinkNode next = null)
-        {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
 
     public GameObject grid;
     public Tilemap map;
@@ -37,8 +24,10 @@ public class Tester : MonoBehaviour
     public GridCell cellTemplate;
     public GridCell emptyGround;
     public ObjectRefTable objectRefTable;
-    public LinkNode node;
     public string testRelativePath;
+    [Space]
+    public GameObject uiPrefab;
+    public ListView listView;
     [Inject] private AudioManager _audioManager;
     [Inject] private TilemapManager _tilemapManager;
     [Inject] private GameInstance _gameInstance;
@@ -95,11 +84,10 @@ public class Tester : MonoBehaviour
         }
     }
 
-    [ContextMenu("Test")]
+    [ContextMenu("Test: Add prefab list view")]
     public void Test()
     {
-        var path = Path.Combine(Application.dataPath, testRelativePath);
-        print($"Combined: {path}, FullPath: {Path.GetFullPath(path)}");
+        listView.Add(uiPrefab);
     }
 
     [ContextMenu("Test Play Sound")]
