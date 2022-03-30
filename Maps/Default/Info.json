@@ -1,6 +1,7 @@
 {
   "TileDataDirectory": "./",
   "EntityDataPath": "./Entities.json",
-  "CreatedTime": "2022-03-27T21:58:03.7059304+08:00",
-  "LastEditedTime": "2022-03-27T21:58:03.7059304+08:00"
+  "CreatedTime": "2022-03-27T22:35:24.2206323+08:00",
+  "LastEditedTime": "2022-03-27T22:35:24.2206323+08:00",
+  "DisplayName": "测试地图名"
 }

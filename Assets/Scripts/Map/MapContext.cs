@@ -1,4 +1,6 @@
+using System;
 using System.IO;
+using Newtonsoft.Json;
 using TileDataIO;
 
 namespace Map
@@ -8,15 +10,36 @@ namespace Map
     /// </summary>
     public class MapContext
     {
-        public MapInfo? info = null;
+        public MapInfo Info
+        {
+            get
+            {
+                if (!MapAvailable)
+                {
+                    throw new NullReferenceException("MapContext doesn't have available map!");
+                }
 
+                return _info!.Value;
+            }
+            set => _info = value;
+        }
         /// <summary>
         /// 当前地图根目录
         /// </summary>
         public string MapDir { get; private set; } = "";
-
-        public string TileDataDirectory => Path.Combine(MapDir, info!.Value.tileDataDirectory);
-        public string EntityDataPath => Path.Combine(MapDir, info!.Value.entityDataPath);
+        /// <summary>
+        /// 地图文件夹名字, 是地图目录中最后一个文件夹的名字
+        /// </summary>
+        public string MapFolderName
+        {
+            get
+            {
+                var index = MapDir.LastIndexOf(Path.DirectorySeparatorChar);
+                return MapDir.Substring(index + 1);
+            }
+        }
+        public string TileDataDirectory => Path.Combine(MapDir, _info!.Value.tileDataDirectory);
+        public string EntityDataPath => Path.Combine(MapDir, _info!.Value.entityDataPath);
         /// <summary>
         /// 当前地图为有效的地图
         /// </summary>
@@ -35,17 +58,17 @@ namespace Map
                 }
             }
         }
-
-        public delegate void DirtyEvent(bool isDirtyNow);
-
-        public event DirtyEvent OnDirtyChanged;
-
         
+        public delegate void MapDirtyEvent(bool isDirtyNow);
+
+        public event MapDirtyEvent OnDirtyChanged;
+
+        private MapInfo? _info = null;
         /// <summary>
         /// 当前地图已经被修改
         /// </summary>
         private bool _dirty = false;
-
+        
         /// <summary>
         /// 地图选中但未加载
         /// </summary>
@@ -53,7 +76,7 @@ namespace Map
         /// <param name="dir"></param>
         public void OnMapSelected(MapInfo target, string dir)
         {
-            info = target;
+            _info = target;
             MapDir = dir;
             _dirty = false;
             MapAvailable = false;
@@ -66,8 +89,8 @@ namespace Map
         /// <param name="dir"></param>
         public void OnMapLoaded(MapInfo info, string dir)
         {
-            this.info = info;
-            MapDir = dir;
+            this._info = info;
+            MapDir = Path.GetFullPath(dir);
             _dirty = false;
             MapAvailable = true;
         }
@@ -77,7 +100,7 @@ namespace Map
         /// </summary>
         public void OnMapClosed()
         {
-            info = null;
+            _info = null;
             MapDir = "";
             _dirty = false;
             MapAvailable = false;

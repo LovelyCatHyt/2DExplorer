@@ -15,7 +15,9 @@ namespace TileDataIO
         [JsonProperty("LastEditedTime")]
         public DateTime lastEditedTime;
         [JsonProperty("Author")]
-        public string Author;
+        public string author;
+        [JsonProperty("DisplayName")]
+        public string displayName;
 
         public static MapInfo CreateInfo() => new MapInfo
         {
@@ -23,14 +25,16 @@ namespace TileDataIO
             entityDataPath = "./Entities.json",
             createdTime = DateTime.Now,
             lastEditedTime = DateTime.Now,
-            Author = "Default"
+            author = "Default",
+            displayName = "默认地图"
         };
 
         [UsedImplicitly]
-        public bool ShouldSerializeAuthor()
+        // ReSharper disable once IdentifierTypo
+        public bool ShouldSerializeauthor()
         {
-            if (string.IsNullOrEmpty(Author)) return false;
-            if (Author == "Default") return false;
+            if (string.IsNullOrEmpty(author)) return false;
+            if (author == "Default") return false;
             return true;
         }
     }

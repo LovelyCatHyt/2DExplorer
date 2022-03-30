@@ -28,9 +28,7 @@ namespace TileDataIO
         /// </summary>
         public ObjectRefTable entityTable;
         public Formatting jsonFormat;
-
-        // TODO: 记录当前地图的路径和(或)MapInfo, 并修改相应的 Save/Load 操作, 直接指定到对应的路径
-
+        
         public const string MapRootRelative
 #if UNITY_EDITOR
             = "../Maps/";
@@ -49,6 +47,8 @@ namespace TileDataIO
         
         private void Awake()
         {
+            if (_mapContext.MapAvailable) return;
+            // 如果地图上下文没有可用的地图, 就加载第一个地图, 或者保存现有的(通常是在开发时创建的Scene中的地图)
             if (GetFirstMapInfo(out var info, out var directory))
             {
                 _mapContext.OnMapLoaded(info, directory);
@@ -59,13 +59,11 @@ namespace TileDataIO
                 Directory.CreateDirectory(DefaultMapDir);
                 var newInfo = MapInfo.CreateInfo();
                 _mapContext.OnMapSelected(newInfo, DefaultMapDir);
-                File.WriteAllText(Path.Combine(DefaultMapDir, "Info.json"), JsonConvert.SerializeObject(newInfo, jsonFormat));
                 // print(DefaultMapDir);
                 SaveWholeGrid();
                 Debug.Log($"No map available. save current map into <b>{Path.GetFullPath(DefaultMapDir)}</b>");
                 _mapContext.OnMapLoaded(newInfo, DefaultMapDir);
             }
-            _game.events.onSaveFinished.AddListener(() => _mapContext.Dirty = false);
         }
 
         public bool GetFirstMapInfo(out MapInfo info, out string directory)
@@ -87,6 +85,7 @@ namespace TileDataIO
                     info = JsonConvert.DeserializeObject<MapInfo>(infoJson);
                     // 不出问题
                     directory = dir;
+                    return true;
                 }
                 catch (JsonReaderException)
                 {
@@ -142,14 +141,23 @@ namespace TileDataIO
             }
         }
 
+        public void SaveMapInfo()
+        {
+            var json = JsonConvert.SerializeObject(_mapContext.Info, jsonFormat);
+            var path = Path.Combine(_mapContext.MapDir, "Info.json");
+            File.WriteAllText(path, json);
+        }
+        
         /// <summary>
         /// 保存整个网格里的地图
         /// </summary>
         /// <param name="grid"></param>
         public void SaveWholeGrid()
         {
+            SaveMapInfo();
             _tilemapManager.GetAllTilemaps().ForEach(map => SaveTileMap(map));
             SaveEntityData();
+            _mapContext.Dirty = false;
         }
 
         public void LoadWholeGrid()
@@ -217,7 +225,6 @@ namespace TileDataIO
         {
             // 取表
             var entities = _tilemapManager.GetAllGameObjects();
-            // TODO: [ToCheck] 根据 MapInfo 获取路径信息
             var path = _mapContext.EntityDataPath;
             // 存文件
             File.WriteAllText(path, JsonConvert.SerializeObject(entities, Formatting.Indented));
@@ -228,7 +235,6 @@ namespace TileDataIO
         /// </summary>
         public void LoadEntityData()
         {
-            // TODO: [ToCheck] 根据 MapInfo 获取路径信息
             var path = _mapContext.EntityDataPath;
             List<EntityData> entities;
             try
