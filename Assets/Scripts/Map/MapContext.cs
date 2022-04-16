@@ -12,15 +12,7 @@ namespace Map
     {
         public MapInfo Info
         {
-            get
-            {
-                if (!MapAvailable)
-                {
-                    throw new NullReferenceException("MapContext doesn't have available map!");
-                }
-
-                return _info!.Value;
-            }
+            get => _info!.Value;
             set => _info = value;
         }
         /// <summary>

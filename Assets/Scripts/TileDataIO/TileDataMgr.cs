@@ -28,7 +28,7 @@ namespace TileDataIO
         /// </summary>
         public ObjectRefTable entityTable;
         public Formatting jsonFormat;
-        
+
         public const string MapRootRelative
 #if UNITY_EDITOR
             = "../Maps/";
@@ -44,7 +44,7 @@ namespace TileDataIO
         [Inject] private TilemapManager _tilemapManager;
         [Inject] private MapContext _mapContext;
         [Inject] private GameInstance _game;
-        
+
         private void Awake()
         {
             if (_mapContext.MapAvailable) return;
@@ -97,11 +97,11 @@ namespace TileDataIO
             return false;
         }
 
-        public List<MapInfo> MapInfos
+        public List<(MapInfo, string)> MapInfos
         {
             get
             {
-                var infoList = new List<MapInfo>();
+                var infoList = new List<(MapInfo, string)>();
                 foreach (var directory in MapDirectories)
                 {
                     string infoJson;
@@ -123,7 +123,7 @@ namespace TileDataIO
                     {
                         continue;
                     }
-                    infoList.Add(info);
+                    infoList.Add((info, directory));
                 }
                 return infoList;
             }
@@ -147,7 +147,7 @@ namespace TileDataIO
             var path = Path.Combine(_mapContext.MapDir, "Info.json");
             File.WriteAllText(path, json);
         }
-        
+
         /// <summary>
         /// 保存整个网格里的地图
         /// </summary>

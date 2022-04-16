@@ -76,19 +76,13 @@ namespace Ui.Prototype
         private void Awake()
         {
             if (!_layout) _layout = GetComponent<LayoutGroup>();
-            // TODO: remove debug below
-            onSelectionChanged.AddListener(e =>
-            {
-                Debug.Log($"Selection changed to [{SelectedId}]: {(e ? e.name : "null")}", e ? e.gameObject : null);
-            });
-            // Debug
         }
 
         /// <summary>
         /// 实例化一个 prefab, 然后添加到列表中
         /// </summary>
         /// <param name="prefab"></param>
-        public void Add(GameObject prefab)
+        public ListElement Add(GameObject prefab)
         {
             var go = _container.InstantiatePrefab(prefab, transform);
             var id = _list.Count;
@@ -103,6 +97,8 @@ namespace Ui.Prototype
                 _selected = _list[0];
                 onSelectionChanged?.Invoke(Selected);
             }
+
+            return element;
         }
 
         /// <summary>
@@ -124,7 +120,7 @@ namespace Ui.Prototype
         {
             var id = _list.IndexOf(element);
             if (id == -1) return;
-            
+
             _list.RemoveAt(id);
             // 重设一下后面的 id
             for (int i = id; i < _list.Count; i++)
@@ -145,6 +141,13 @@ namespace Ui.Prototype
         {
             if (i < 0 || i >= _list.Count) return;
             Remove(_list[i]);
+        }
+
+        public void RemoveAll()
+        {
+            _list.ForEach(e => Destroy(e.gameObject));
+            _list.Clear();
+            onSelectionChanged?.Invoke(null);
         }
 
         [ContextMenu("Remove last")]
